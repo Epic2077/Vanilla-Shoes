@@ -12,7 +12,8 @@ export function El({
     elem[attr] = rest[attr];
   }
   if (children) {
-    for (const child of children) {
+    const childrenArray = Array.isArray(children) ? children : [children];
+    for (const child of childrenArray) {
       elem.append(child);
     }
   }

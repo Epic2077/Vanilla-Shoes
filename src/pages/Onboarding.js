@@ -1,6 +1,16 @@
 import { El } from "../utils/create-element";
 
 export default function OnBoardingPage() {
-  const body = document.getElementById("body");
-  body.classList.add("w-screen h-screen bg-red-600");
+  const testing = El({
+    element: "h1",
+    children: "Testing this out",
+    className: "color-black ",
+  });
+
+  const container = El({
+    element: "div",
+    children: testing,
+    className: "w-screen h-screen grid justify-center items-center",
+  });
+  return container;
 }
