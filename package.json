@@ -13,5 +13,8 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
     "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "navigo": "^8.11.1"
   }
 }
