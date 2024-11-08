@@ -1,0 +1,20 @@
+{
+  "name": "shopserver",
+  "version": "1.0.0",
+  "description": "This project is Server of Website, that about Shoes Shop",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx json-server --watch db.json --static ./public --port 3000"
+  },
+  "keywords": [
+    "server",
+    "shopserver",
+    "shoesShop",
+    "json-server"
+  ],
+  "author": "aliziaeijazi@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
