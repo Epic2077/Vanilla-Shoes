@@ -17,10 +17,14 @@ export default function OnBoardingPage() {
     children: "Shoea",
     className: "color-black font-bold text-logo font-sans ml-2",
   });
-
+  const loading = El({
+    element: "img",
+    src: "./src/assets/image/spinner-atom.svg",
+    className: "absolute bottom-[117px] animate-spin",
+  });
   const container = El({
     element: "div",
-    children: [logo, logoName],
+    children: [logo, logoName, loading],
     className: "w-screen h-screen flex justify-center items-center",
   });
   return container;
