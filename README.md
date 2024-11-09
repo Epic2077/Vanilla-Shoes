@@ -38,9 +38,9 @@ The **Shoes E-Commerce App** is built to guide new users through a welcoming jou
 
 - **JavaScript (ES6+)**
 - **HTML5 & CSS3**
-- **Styles used => Tailwind**
-- **template used => vite**
-- **Design used => [Figma Project](https://www.figma.com/design/ku0eN6V3Qga0p9rmboXPcC/shoe-exercise?node-id=0-1&t=GPeKBtALkxkTluEY-1)**
+- **Tailwind**
+- **vite**
+- **[Figma](https://www.figma.com/design/ku0eN6V3Qga0p9rmboXPcC/shoe-exercise?node-id=0-1&t=GPeKBtALkxkTluEY-1)**
 - **Custom Components (via `El` Utility Function)**
 
 This project relies on a modular approach, leveraging reusable components to create UI elements and manage state.
