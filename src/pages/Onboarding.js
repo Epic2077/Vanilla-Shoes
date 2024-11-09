@@ -1,3 +1,4 @@
+import { router } from "../routes/router";
 import { El } from "../utils/create-element";
 
 export default function OnBoardingPage() {
@@ -33,12 +34,12 @@ export default function OnBoardingPage() {
   });
 
   //   setTimeout(() => {
-  const newContent = welcome();
-  page.innerHTML = newContent.innerHTML;
+  // container.replaceWith(welcome());
   //   }, 3000);
   //   setTimeout(() => {
   const questionOne = qOne();
-  page.innerHTML = questionOne.innerHTML;
+  page.innerHTML = "";
+  page.appendChild(questionOne);
   //   }, 5000);
   return page;
 }
@@ -79,7 +80,7 @@ function welcome() {
   const newContent = El({
     element: "div",
     children: [background],
-    className: "text-center text-xl font-bold mt-5",
+    className: "",
   });
   return newContent;
 }
@@ -113,7 +114,7 @@ function qOne() {
   const indicator = El({
     element: "div",
     children: [],
-    className: "flex gap-[6px] mt-[59px] justify-center",
+    className: `flex gap-[6px] justify-center`,
   });
 
   function renderIndicators() {
@@ -133,33 +134,42 @@ function qOne() {
   function displaySlide(container) {
     container.innerHTML = "";
 
+    const isLastSlide = currentSlide === slides.length - 1;
+    const nextButtonText = isLastSlide ? "Get Started" : "Next";
+    const nextIndicatorClass = isLastSlide ? "mt-[31px]" : "mt-[59px]";
+
     const image = El({
       element: "img",
       src: slides[currentSlide].imageSrc,
-      className: "w-screen mt-[-55px] h-[657px]",
+      className: "w-screen mt-[-55px] h-[644px] ",
     });
 
     const text = El({
       element: "h2",
       children: slides[currentSlide].text,
       className:
-        "font-semibold text-[32px] text-center leading-[38.73px] px-[24px] py-[30px]",
+        "font-semibold text-[32px] text-center leading-[38.73px] px-[24px] py-[30px] ",
     });
 
+    indicator.className = `flex gap-[6px] ${nextIndicatorClass} justify-center`;
     renderIndicators();
 
     const next = El({
       element: "button",
-      children: "Next",
+      children: nextButtonText,
       className:
         "w-[380px] mx-[24px] mt-[40px] bg-black font-medium text-[14px] text-white h-[47px] rounded-3xl z-10",
       eventListener: [
         {
           event: "click",
           callback: () => {
-            console.log("I'm working");
-            currentSlide = (currentSlide + 1) % slides.length;
-            displaySlide(newContent);
+            if (currentSlide === slides.length - 1) {
+              router.navigate("/Home");
+            } else {
+              console.log("I'm working");
+              currentSlide = (currentSlide + 1) % slides.length;
+              displaySlide(newContent);
+            }
           },
         },
       ],
