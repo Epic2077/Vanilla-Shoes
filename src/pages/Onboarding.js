@@ -130,18 +130,18 @@ function qOne() {
     });
   }
 
-  function displaySlide(container, slideIndex) {
+  function displaySlide(container) {
     container.innerHTML = "";
 
     const image = El({
       element: "img",
-      src: slides[slideIndex].imageSrc,
+      src: slides[currentSlide].imageSrc,
       className: "w-screen mt-[-55px] h-[657px]",
     });
 
     const text = El({
       element: "h2",
-      children: slides[slideIndex].text,
+      children: slides[currentSlide].text,
       className:
         "font-semibold text-[32px] text-center leading-[38.73px] px-[24px] py-[30px]",
     });
@@ -152,23 +152,21 @@ function qOne() {
       element: "button",
       children: "Next",
       className:
-        "w-[380px] mx-[24px] mt-[40px] bg-black font-medium text-[14px] text-white h-[47px] rounded-3xl",
+        "w-[380px] mx-[24px] mt-[40px] bg-black font-medium text-[14px] text-white h-[47px] rounded-3xl z-10",
       eventListener: [
         {
           event: "click",
           callback: () => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            displaySlide(newContent, currentSlide);
-
-            renderIndicators();
             console.log("I'm working");
+            currentSlide = (currentSlide + 1) % slides.length;
+            displaySlide(newContent);
           },
         },
       ],
     });
     container.append(image, text, indicator, next);
   }
-  displaySlide(newContent, currentSlide);
+  displaySlide(newContent);
 
   return newContent;
 }
