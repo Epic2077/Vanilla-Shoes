@@ -56,3 +56,27 @@ To set up this project locally, follow these steps:
    git clone https://github.com/Epic2077/Vanilla-Shoes.git
    cd Vanilla-Shoes
    ```
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Run the App**:
+   Use a development server to serve the app locally. You may use a server of your choice, such as `lite-server`, `live-server`, `webpack dev server`, or as I use `vite`
+   ```bash
+   npm run dev
+   ```
+4. **Install Back-end**:
+   The back-end of the website is stored in another repo called [Vanilla-Shoes-back-end](#). It contains the api and JSON needed for the project to be fetched using `JSON-server`.
+   `bash
+    git clone https://github.com/Epic2077/Vanilla-Shoes-back-end.git
+    cd Vanilla-Shoes-back-end
+    `
+   Then install the dependencies.
+   `bash
+    npm install
+    `
+   Now you can start the `JSON-server`.
+   `bash
+    npm start
+    `
+   !**Make Sure the local address of your server and `JSON-server` is different!**
