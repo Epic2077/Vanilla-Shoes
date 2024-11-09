@@ -32,14 +32,18 @@ export default function OnBoardingPage() {
     children: container,
   });
 
-  //   setTimeout(() => {
-  const newContent = newData();
-  page.innerHTML = newContent.innerHTML;
-  //   }, 5000);
+  setTimeout(() => {
+    const newContent = welcome();
+    page.innerHTML = newContent.innerHTML;
+  }, 3000);
+  setTimeout(() => {
+    const questionOne = qOne();
+    page.innerHTML = questionOne.innerHTML;
+  }, 5000);
   return page;
 }
 
-function newData() {
+function welcome() {
   const welcome = El({
     element: "h2",
     children: "Welcome to 👋",
@@ -53,7 +57,7 @@ function newData() {
   const des = El({
     element: "p",
     children:
-      "The best sneakers & shoes e-commerse app of the century for your fashion needs!",
+      "The best sneakers & shoes e-commerce app of the century for your fashion needs!",
     className: "font-semibold text-white text-[16px]",
   });
   const content = El({
@@ -76,6 +80,53 @@ function newData() {
     element: "div",
     children: [background],
     className: "text-center text-xl font-bold mt-5",
+  });
+  return newContent;
+}
+
+function qOne() {
+  const next = El({
+    element: "button",
+    children: "Next",
+    className:
+      "w-[380px] mx-[24px] mt-[40px] bg-black font-medium text-[14px] text-white h-[47px] rounded-3xl",
+  });
+  const activeIndi = El({
+    element: "div",
+    className: "bg-[#212529] w-[30px] h-[3px]  ",
+  });
+  const deActiveIndiOne = El({
+    element: "div",
+    className: "bg-slate-400 w-[30px] h-[3px]",
+  });
+  const deActiveIndiTwo = El({
+    element: "div",
+    className: "bg-slate-400 w-[30px] h-[3px]",
+  });
+  const indicator = El({
+    element: "div",
+    children: [activeIndi, deActiveIndiOne, deActiveIndiTwo],
+    className: "flex gap-[6px] mt-[59px] justify-center",
+  });
+  const text = El({
+    element: "h2",
+    children: "We provide high quality products just for you",
+    className: "font-semibold text-[32px] text-center leading-[38.73px]",
+  });
+  const content = El({
+    element: "div",
+    children: [text],
+    className: "grid px-[24px] py-[30px]",
+  });
+  const image = El({
+    element: "img",
+    src: "./src/assets/image/qOne-image.png",
+    className: "w-screen mt-[-55px] h-[657px]",
+  });
+  const newContent = El({
+    element: "div",
+    children: [image, content, indicator, next],
+    className: "",
   });
   return newContent;
 }
