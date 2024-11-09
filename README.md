@@ -10,10 +10,7 @@ Welcome to the **Vanilla Shoes e-commerce app**, a modern, visually engaging onb
 - [Features](#features)
 - [Built With](#built-with)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ---
 
@@ -67,16 +64,41 @@ To set up this project locally, follow these steps:
    ```
 4. **Install Back-end**:
    The back-end of the website is stored in another repo called [Vanilla-Shoes-back-end](#). It contains the api and JSON needed for the project to be fetched using `JSON-server`.
+
    ```bash
     git clone https://github.com/Epic2077/Vanilla-Shoes-back-end.git
     cd Vanilla-Shoes-back-end
    ```
+
    Then install the dependencies.
+
    ```bash
     npm install
    ```
+
    Now you can start the `JSON-server`.
+
    ```bash
     npm start
    ```
-   !**Make Sure the local address of your server and `JSON-server` is different!**
+
+   **Make Sure the local address of your server and `JSON-server` is different!**
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Follow these steps to get involved:
+
+1. Fork the project
+2. Create a new branch: `git checkout -b feature/YourFeature`
+3. Commit your changes: `git commit -m 'Add YourFeature'`
+4. Push to the branch: `git push origin feature/YourFeature`
+5. Open a pull request
+
+---
+
+## 👏 Acknowledgments
+
+- Special thanks to the open-source community for the tools and resources that inspired this project.
+- Thanks to [Maktab Sharif](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://maktabsharif.ir/&ved=2ahUKEwinmq3kzc-JAxU_hv0HHRmTJzgQFnoECBoQAQ&usg=AOvVaw0Zpog7mWc26mxQ5yxC_XN3) for helping me overcome the challenges of becoming a Front-End developer.
