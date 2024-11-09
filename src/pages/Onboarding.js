@@ -85,6 +85,11 @@ function welcome() {
 }
 
 function qOne() {
+  const newContent = El({
+    element: "div",
+    children: [],
+    className: "",
+  });
   const slides = [
     {
       imageSrc: "./src/assets/image/qOne-image.png",
@@ -105,33 +110,10 @@ function qOne() {
 
   let currentSlide = 0;
 
-  //   const activeIndi = El({
-  //     element: "div",
-  //     className: "bg-[#212529] w-[30px] h-[3px]  ",
-  //   });
-  //   const deActiveIndiOne = El({
-  //     element: "div",
-  //     className: "bg-slate-400 w-[30px] h-[3px]",
-  //   });
-  //   const deActiveIndiTwo = El({
-  //     element: "div",
-  //     className: "bg-slate-400 w-[30px] h-[3px]",
-  //   });
   const indicator = El({
     element: "div",
     children: [],
     className: "flex gap-[6px] mt-[59px] justify-center",
-  });
-  const text = El({
-    element: "h2",
-    children: slides[currentSlide].text,
-    className:
-      "font-semibold text-[32px] text-center leading-[38.73px] px-[24px] py-[30px]",
-  });
-  const image = El({
-    element: "img",
-    src: slides[currentSlide].imageSrc,
-    className: "w-screen mt-[-55px] h-[657px]",
   });
 
   function renderIndicators() {
@@ -147,32 +129,46 @@ function qOne() {
       indicator.appendChild(indicatorDot);
     });
   }
-  renderIndicators();
 
-  const next = El({
-    element: "button",
-    children: "Next",
-    className:
-      "w-[380px] mx-[24px] mt-[40px] bg-black font-medium text-[14px] text-white h-[47px] rounded-3xl",
-    eventListener: [
-      {
-        event: "click",
-        callback: () => {
-          currentSlide = (currentSlide + 1) % slides.length;
-          image.src = slides[currentSlide].imageSrc;
-          text.innerHTML = slide[currentSlide].text;
+  function displaySlide(container, slideIndex) {
+    container.innerHTML = "";
 
-          renderIndicators();
-          console.log("I'm working");
+    const image = El({
+      element: "img",
+      src: slides[slideIndex].imageSrc,
+      className: "w-screen mt-[-55px] h-[657px]",
+    });
+
+    const text = El({
+      element: "h2",
+      children: slides[slideIndex].text,
+      className:
+        "font-semibold text-[32px] text-center leading-[38.73px] px-[24px] py-[30px]",
+    });
+
+    renderIndicators();
+
+    const next = El({
+      element: "button",
+      children: "Next",
+      className:
+        "w-[380px] mx-[24px] mt-[40px] bg-black font-medium text-[14px] text-white h-[47px] rounded-3xl",
+      eventListener: [
+        {
+          event: "click",
+          callback: () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            displaySlide(newContent, currentSlide);
+
+            renderIndicators();
+            console.log("I'm working");
+          },
         },
-      },
-    ],
-  });
+      ],
+    });
+    container.append(image, text, indicator, next);
+  }
+  displaySlide(newContent, currentSlide);
 
-  const newContent = El({
-    element: "div",
-    children: [image, text, indicator, next],
-    className: "",
-  });
   return newContent;
 }
