@@ -32,14 +32,14 @@ export default function OnBoardingPage() {
     children: container,
   });
 
-  setTimeout(() => {
-    const newContent = welcome();
-    page.innerHTML = newContent.innerHTML;
-  }, 3000);
-  setTimeout(() => {
-    const questionOne = qOne();
-    page.innerHTML = questionOne.innerHTML;
-  }, 5000);
+  //   setTimeout(() => {
+  const newContent = welcome();
+  page.innerHTML = newContent.innerHTML;
+  //   }, 3000);
+  //   setTimeout(() => {
+  const questionOne = qOne();
+  page.innerHTML = questionOne.innerHTML;
+  //   }, 5000);
   return page;
 }
 
@@ -85,47 +85,93 @@ function welcome() {
 }
 
 function qOne() {
+  const slides = [
+    {
+      imageSrc: "./src/assets/image/qOne-image.png",
+      text: "We provide high quality products just for you",
+      activeIndex: 0,
+    },
+    {
+      imageSrc: "./src/assets/image/qTwo-image.png",
+      text: "Your satisfaction is our number one priority",
+      activeIndex: 1,
+    },
+    {
+      imageSrc: "./src/assets/image/qThree-image.png",
+      text: "Let's fulfill your fashion needs with Shoea right now!",
+      activeIndex: 2,
+    },
+  ];
+
+  let currentSlide = 0;
+
+  //   const activeIndi = El({
+  //     element: "div",
+  //     className: "bg-[#212529] w-[30px] h-[3px]  ",
+  //   });
+  //   const deActiveIndiOne = El({
+  //     element: "div",
+  //     className: "bg-slate-400 w-[30px] h-[3px]",
+  //   });
+  //   const deActiveIndiTwo = El({
+  //     element: "div",
+  //     className: "bg-slate-400 w-[30px] h-[3px]",
+  //   });
+  const indicator = El({
+    element: "div",
+    children: [],
+    className: "flex gap-[6px] mt-[59px] justify-center",
+  });
+  const text = El({
+    element: "h2",
+    children: slides[currentSlide].text,
+    className:
+      "font-semibold text-[32px] text-center leading-[38.73px] px-[24px] py-[30px]",
+  });
+  const image = El({
+    element: "img",
+    src: slides[currentSlide].imageSrc,
+    className: "w-screen mt-[-55px] h-[657px]",
+  });
+
+  function renderIndicators() {
+    indicator.innerHTML = "";
+    slides.forEach((_, index) => {
+      const indicatorDot = El({
+        element: "div",
+        className:
+          index === currentSlide
+            ? "bg-[#212529] w-[30px] h-[3px]"
+            : "bg-slate-400 w-[30px] h-[3px]",
+      });
+      indicator.appendChild(indicatorDot);
+    });
+  }
+  renderIndicators();
+
   const next = El({
     element: "button",
     children: "Next",
     className:
       "w-[380px] mx-[24px] mt-[40px] bg-black font-medium text-[14px] text-white h-[47px] rounded-3xl",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => {
+          currentSlide = (currentSlide + 1) % slides.length;
+          image.src = slides[currentSlide].imageSrc;
+          text.innerHTML = slide[currentSlide].text;
+
+          renderIndicators();
+          console.log("I'm working");
+        },
+      },
+    ],
   });
-  const activeIndi = El({
-    element: "div",
-    className: "bg-[#212529] w-[30px] h-[3px]  ",
-  });
-  const deActiveIndiOne = El({
-    element: "div",
-    className: "bg-slate-400 w-[30px] h-[3px]",
-  });
-  const deActiveIndiTwo = El({
-    element: "div",
-    className: "bg-slate-400 w-[30px] h-[3px]",
-  });
-  const indicator = El({
-    element: "div",
-    children: [activeIndi, deActiveIndiOne, deActiveIndiTwo],
-    className: "flex gap-[6px] mt-[59px] justify-center",
-  });
-  const text = El({
-    element: "h2",
-    children: "We provide high quality products just for you",
-    className: "font-semibold text-[32px] text-center leading-[38.73px]",
-  });
-  const content = El({
-    element: "div",
-    children: [text],
-    className: "grid px-[24px] py-[30px]",
-  });
-  const image = El({
-    element: "img",
-    src: "./src/assets/image/qOne-image.png",
-    className: "w-screen mt-[-55px] h-[657px]",
-  });
+
   const newContent = El({
     element: "div",
-    children: [image, content, indicator, next],
+    children: [image, text, indicator, next],
     className: "",
   });
   return newContent;

@@ -1,7 +1,7 @@
 export function El({
   element,
   children,
-  evertlistener,
+  eventListener,
   dataset,
   restAttrs = {},
   className = "",
@@ -17,8 +17,8 @@ export function El({
       elem.append(child);
     }
   }
-  if (evertlistener) {
-    evertlistener.map((el) => elem.addEventListener(el.event, el.callback));
+  if (eventListener) {
+    eventListener.forEach((el) => elem.addEventListener(el.event, el.callback));
   }
   if (dataset) {
     elem.dataset[key] = dataset[key];
