@@ -33,14 +33,14 @@ export default function OnBoardingPage() {
     children: container,
   });
 
-  //   setTimeout(() => {
-  // container.replaceWith(welcome());
-  //   }, 3000);
-  //   setTimeout(() => {
-  const questionOne = qOne();
-  page.innerHTML = "";
-  page.appendChild(questionOne);
-  //   }, 5000);
+  setTimeout(() => {
+    container.replaceWith(welcome());
+  }, 3000);
+  setTimeout(() => {
+    const questionOne = qOne();
+    page.innerHTML = "";
+    page.appendChild(questionOne);
+  }, 5000);
   return page;
 }
 
