@@ -1,6 +1,21 @@
 import { El } from "../utils/create-element";
 
 const HomePage = () => {
+  const fav = El({
+    element: "img",
+    src: "./src/assets/image/heart.svg",
+    className: "",
+  });
+  const notif = El({
+    element: "img",
+    src: "./src/assets/image/bell.svg",
+    className: "",
+  });
+  const icons = El({
+    element: "div",
+    children: [notif, fav],
+    className: "flex w-[24px] gap-[16px] ml-[120px]",
+  });
   const login = El({
     element: "p",
     children: "Login",
@@ -25,19 +40,37 @@ const HomePage = () => {
   const profileData = El({
     element: "div",
     children: [pfp, pfpContent],
-    className: "flex",
+    className: "flex ",
   });
 
   const header = El({
     element: "header",
-    children: [profileData],
-    className: "w-screen h-[80px] flex items-center",
+    children: [profileData, icons],
+    className: " h-[80px] flex items-center",
+  });
+
+  const searchIcon = El({
+    element: "img",
+    src: "./src/assets/image/search.svg",
+    className: "",
+  });
+  const searchBar = El({
+    element: "input",
+    type: "search",
+    placeholder: "Search",
+    className:
+      "bg-transparent ml-[4px] font-normal text-[14px] rounded-[4px] w-full outline-none border-none",
+  });
+  const search = El({
+    element: "div",
+    children: [searchIcon, searchBar],
+    className: "w-full h-[37px] bg-[#FAFAFA] flex items-center px-4",
   });
 
   const home = El({
     element: "section",
-    children: [header],
-    className: "px-[24px] w-screen",
+    children: [header, search],
+    className: "px-[24px]",
   });
 
   return home;
