@@ -64,7 +64,7 @@ const HomePage = () => {
   const search = El({
     element: "div",
     children: [searchIcon, searchBar],
-    className: "w-full h-[37px] bg-[#FAFAFA] flex items-center px-4",
+    className: "w-full h-[37px] bg-[#FAFAFA] flex items-center px-4 mt-[8px]",
   });
 
   const home = El({
