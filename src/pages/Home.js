@@ -67,9 +67,32 @@ const HomePage = () => {
     className: "w-full h-[37px] bg-[#FAFAFA] flex items-center px-4 mt-[8px]",
   });
 
+  const icon = El({
+    element: "img",
+    src: "./src/assets/icons/nike.svg",
+    className: "w-[30px] h-[19px]",
+  });
+  const circle = El({
+    element: "div",
+    children: [icon],
+    className:
+      "w-[60px] bg-[#ECECEC] h-[60px] rounded-full justify-center items-center grid",
+  });
+  const brand = El({
+    element: "div",
+    children: [circle],
+    className: "grid gap-[13px]",
+  });
+  const brands = El({
+    element: "div",
+    children: [brand],
+    className:
+      "mt-[10px] w-[380px] h-[234px] grid justify-between px-[8px] py-[12px]",
+  });
+
   const home = El({
     element: "section",
-    children: [header, search],
+    children: [header, search, brands],
     className: "px-[24px]",
   });
 
