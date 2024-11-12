@@ -67,27 +67,63 @@ const HomePage = () => {
     className: "w-full h-[37px] bg-[#FAFAFA] flex items-center px-4 mt-[8px]",
   });
 
-  const icon = El({
-    element: "img",
-    src: "./src/assets/icons/nike.svg",
-    className: "w-[30px] h-[19px]",
-  });
-  const circle = El({
-    element: "div",
-    children: [icon],
-    className:
-      "w-[60px] bg-[#ECECEC] h-[60px] rounded-full justify-center items-center grid",
-  });
-  const brand = El({
-    element: "div",
-    children: [circle],
-    className: "grid gap-[13px]",
-  });
+  //For brands use a loop
+  const brandsData = [
+    { iconSrc: "./src/assets/icons/nike.svg", name: "Nike" },
+    { iconSrc: "./src/assets/icons/adidas.svg", name: "Adidas" },
+    { iconSrc: "./src/assets/icons/puma.svg", name: "Puma" },
+    { iconSrc: "./src/assets/icons/asics.svg", name: "Asics" },
+    { iconSrc: "./src/assets/icons/reebok.svg", name: "Reebok" },
+    { iconSrc: "./src/assets/icons/newbalance.svg", name: "New Ba.." },
+    { iconSrc: "./src/assets/icons/converse.svg", name: "Converse" },
+    { iconSrc: "./src/assets/icons/more.svg", name: "More .." },
+  ];
+
+  const createBrandElement = (brand) => {
+    const icon = El({
+      element: "img",
+      src: brand.iconSrc,
+      className: "w-[30px] h-[19px]",
+      // Add an event listener to make the brand circle clickable
+      eventListener: [
+        {
+          event: "click",
+          callback: () => {
+            console.log(`Brand ${brand.name} clicked!`);
+            // Add filter logic here for future use
+          },
+        },
+      ],
+    });
+
+    const circle = El({
+      element: "div",
+      children: [icon],
+      className:
+        "w-[60px] bg-[#ECECEC] h-[60px] rounded-full grid items-center justify-center",
+    });
+
+    const brandNames = El({
+      element: "p",
+      children: brand.name,
+      className: ["text-center"],
+    });
+
+    return El({
+      element: "div",
+      children: [circle, brandNames],
+      className:
+        "text-center truncate overflow-hidden text-ellipsis whitespace-nowrap w-[70px] grid justify-center",
+    });
+  };
+
+  const brandElements = brandsData.map(createBrandElement);
+
   const brands = El({
     element: "div",
-    children: [brand],
+    children: brandElements,
     className:
-      "mt-[10px] w-[380px] h-[234px] grid justify-between px-[8px] py-[12px]",
+      "mt-[10px] w-[380px] h-[234px] grid grid-cols-4 px-[8px] py-[12px] justify-between gap-[41px]",
   });
 
   const home = El({
