@@ -1,4 +1,5 @@
 import { El } from "../utils/create-element";
+import { getProducts } from "../api/product";
 
 const createHeader = () => {
   const fav = El({ element: "img", src: "./src/assets/image/heart.svg" });
@@ -63,18 +64,17 @@ const createSearchBar = () => {
   });
 };
 
+const brandsData = [
+  { iconSrc: "./src/assets/icons/nike.svg", name: "Nike" },
+  { iconSrc: "./src/assets/icons/adidas.svg", name: "Adidas" },
+  { iconSrc: "./src/assets/icons/puma.svg", name: "Puma" },
+  { iconSrc: "./src/assets/icons/asics.svg", name: "Asics" },
+  { iconSrc: "./src/assets/icons/reebok.svg", name: "Reebok" },
+  { iconSrc: "./src/assets/icons/newbalance.svg", name: "New Ba.." },
+  { iconSrc: "./src/assets/icons/converse.svg", name: "Converse" },
+  { iconSrc: "./src/assets/icons/more.svg", name: "More .." },
+];
 const createBrandIcons = () => {
-  const brandsData = [
-    { iconSrc: "./src/assets/icons/nike.svg", name: "Nike" },
-    { iconSrc: "./src/assets/icons/adidas.svg", name: "Adidas" },
-    { iconSrc: "./src/assets/icons/puma.svg", name: "Puma" },
-    { iconSrc: "./src/assets/icons/asics.svg", name: "Asics" },
-    { iconSrc: "./src/assets/icons/reebok.svg", name: "Reebok" },
-    { iconSrc: "./src/assets/icons/newbalance.svg", name: "New Ba.." },
-    { iconSrc: "./src/assets/icons/converse.svg", name: "Converse" },
-    { iconSrc: "./src/assets/icons/more.svg", name: "More .." },
-  ];
-
   const createBrandElement = (brand) => {
     const icon = El({
       element: "img",
@@ -116,16 +116,114 @@ const createBrandIcons = () => {
   });
 };
 
+const createFiltration = () => {
+  const mostPopular = El({
+    element: "h2",
+    children: "Most Popular",
+    className: "font-semibold text-[20px] text-black",
+  });
+  const seeAll = El({
+    element: "p",
+    children: "See All",
+    className: "font-semibold text-[16px] text-black",
+  });
+  const filterHead = El({
+    element: "div",
+    children: [mostPopular, seeAll],
+    className: "justify-between w-full mb-[20px] flex mt-[4px]",
+  });
+  const filterButtonsActive = El({
+    element: "div",
+    children: "All",
+    className:
+      "bg-[#343A40] px-[20px]  h-[39px] border-[2px] border-[#343A40] text-white font-semibold text-[16px] items-center grid rounded-[25px]",
+  });
+  const filterBrand = (brand) => {
+    const brandName = El({
+      element: "p",
+      children: brand.name,
+      className: "font-semibold text-[16px] text-[#343A40]",
+    });
+    const filterButton = El({
+      element: "div",
+      children: brandName,
+      className:
+        "grid bg-transparent border-[2px] border-[#343A40] justify-center items-center px-[20px] h-[39px] rounded-[25px]",
+    });
+    return filterButton;
+  };
+  const filterBody = El({
+    element: "div",
+    children: [filterButtonsActive, ...brandsData.map(filterBrand)],
+    className:
+      "flex gap-[12px] max-w-full w-max overflow-x-auto hide-scrollbar overflow-y-hidden h-[50px] ",
+  });
+  const filter = El({
+    element: "div",
+    children: [filterHead, filterBody],
+    className: "",
+  });
+  return filter;
+};
+
+const createProductCard = (product) => {
+  const img = El({
+    element: "img",
+    src: product.images,
+    className: "w-[142px] h-[142px]",
+  });
+  const imgBox = El({
+    element: "div",
+    children: img,
+    className:
+      "w-[182px] h-[182px] grid justify-center items-center bg-[#F3F3F3] rounded-[24px]",
+  });
+  const names = El({
+    element: "h3",
+    children: product.title,
+    className: "font-bold text-[20px] mt-[12px]",
+  });
+  const price = El({
+    element: "p",
+    children: `$ ${product.price}`,
+    className: "font-semibold text[16px] mt-[8px]",
+  });
+  const card = El({
+    element: "div",
+    children: [imgBox, names, price],
+    className: `w-[128px]  grid ${product.brand} mb-[8px]`,
+  });
+  return card;
+};
+const loadProduct = async (productContainer) => {
+  try {
+    const products = await getProducts();
+    console.log(products);
+
+    const productCards = products.map(createProductCard);
+    productContainer.append(...productCards);
+  } catch {
+    console.error("Failed to load products:");
+  }
+};
 // Main HomePage function
 
 const HomePage = () => {
   const header = createHeader();
   const search = createSearchBar();
   const brands = createBrandIcons();
+  const filter = createFiltration();
+
+  const productContainer = El({
+    element: "div",
+    className: "grid grid-cols-2 md:grid-cols-4 gap-[16px] mt-[24px]",
+  });
+
+  loadProduct(productContainer);
 
   return El({
     element: "section",
-    children: [header, search, brands],
+    children: [header, search, brands, filter, productContainer],
     className: "px-[24px]",
   });
 };
