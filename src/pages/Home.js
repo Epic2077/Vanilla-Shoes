@@ -1,21 +1,14 @@
 import { El } from "../utils/create-element";
 
-const HomePage = () => {
-  const fav = El({
-    element: "img",
-    src: "./src/assets/image/heart.svg",
-    className: "",
-  });
-  const notif = El({
-    element: "img",
-    src: "./src/assets/image/bell.svg",
-    className: "",
-  });
+const createHeader = () => {
+  const fav = El({ element: "img", src: "./src/assets/image/heart.svg" });
+  const notif = El({ element: "img", src: "./src/assets/image/bell.svg" });
   const icons = El({
     element: "div",
     children: [notif, fav],
     className: "flex w-[24px] gap-[16px] ml-[120px]",
   });
+
   const login = El({
     element: "p",
     children: "Login",
@@ -33,26 +26,27 @@ const HomePage = () => {
   });
   const pfp = El({
     element: "div",
-    children: [],
     className:
       "bg-[url('./src/assets/image/pfp.png')] w-[48px] h-[48px] rounded-full",
   });
+
   const profileData = El({
     element: "div",
     children: [pfp, pfpContent],
-    className: "flex ",
+    className: "flex",
   });
 
-  const header = El({
+  return El({
     element: "header",
     children: [profileData, icons],
-    className: " h-[80px] flex items-center",
+    className: "h-[80px] flex items-center",
   });
+};
 
+const createSearchBar = () => {
   const searchIcon = El({
     element: "img",
     src: "./src/assets/image/search.svg",
-    className: "",
   });
   const searchBar = El({
     element: "input",
@@ -61,13 +55,15 @@ const HomePage = () => {
     className:
       "bg-transparent ml-[4px] font-normal text-[14px] rounded-[4px] w-full outline-none border-none",
   });
-  const search = El({
+
+  return El({
     element: "div",
     children: [searchIcon, searchBar],
     className: "w-full h-[37px] bg-[#FAFAFA] flex items-center px-4 mt-[8px]",
   });
+};
 
-  //For brands use a loop
+const createBrandIcons = () => {
   const brandsData = [
     { iconSrc: "./src/assets/icons/nike.svg", name: "Nike" },
     { iconSrc: "./src/assets/icons/adidas.svg", name: "Adidas" },
@@ -84,14 +80,10 @@ const HomePage = () => {
       element: "img",
       src: brand.iconSrc,
       className: "w-[30px] h-[19px]",
-      // Add an event listener to make the brand circle clickable
       eventListener: [
         {
           event: "click",
-          callback: () => {
-            console.log(`Brand ${brand.name} clicked!`);
-            // Add filter logic here for future use
-          },
+          callback: () => console.log(`Brand ${brand.name} clicked!`),
         },
       ],
     });
@@ -102,11 +94,10 @@ const HomePage = () => {
       className:
         "w-[60px] bg-[#ECECEC] h-[60px] rounded-full grid items-center justify-center",
     });
-
     const brandNames = El({
       element: "p",
       children: brand.name,
-      className: ["text-center"],
+      className: ["text-center truncate"],
     });
 
     return El({
@@ -117,22 +108,26 @@ const HomePage = () => {
     });
   };
 
-  const brandElements = brandsData.map(createBrandElement);
-
-  const brands = El({
+  return El({
     element: "div",
-    children: brandElements,
+    children: brandsData.map(createBrandElement),
     className:
       "mt-[10px] w-[380px] h-[234px] grid grid-cols-4 px-[8px] py-[12px] justify-between gap-[41px]",
   });
+};
 
-  const home = El({
+// Main HomePage function
+
+const HomePage = () => {
+  const header = createHeader();
+  const search = createSearchBar();
+  const brands = createBrandIcons();
+
+  return El({
     element: "section",
     children: [header, search, brands],
     className: "px-[24px]",
   });
-
-  return home;
 };
 
 export default HomePage;
