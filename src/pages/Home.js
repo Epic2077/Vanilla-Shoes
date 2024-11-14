@@ -69,14 +69,30 @@ const createSearchBar = () => {
 };
 
 const brandsData = [
-  { iconSrc: "./src/assets/icons/nike.svg", name: "Nike" },
-  { iconSrc: "./src/assets/icons/adidas.svg", name: "Adidas" },
-  { iconSrc: "./src/assets/icons/puma.svg", name: "Puma" },
-  { iconSrc: "./src/assets/icons/asics.svg", name: "Asics" },
-  { iconSrc: "./src/assets/icons/reebok.svg", name: "Reebok" },
-  { iconSrc: "./src/assets/icons/newbalance.svg", name: "NewBa.." },
-  { iconSrc: "./src/assets/icons/converse.svg", name: "Converse" },
-  { iconSrc: "./src/assets/icons/more.svg", name: "More.." },
+  { iconSrc: "./src/assets/icons/nike.svg", name: "Nike", fullName: "Nike" },
+  {
+    iconSrc: "./src/assets/icons/adidas.svg",
+    name: "Adidas",
+    fullName: "Adidas",
+  },
+  { iconSrc: "./src/assets/icons/puma.svg", name: "Puma", fullName: "Puma" },
+  { iconSrc: "./src/assets/icons/asics.svg", name: "Asics", fullName: "Asics" },
+  {
+    iconSrc: "./src/assets/icons/reebok.svg",
+    name: "Reebok",
+    fullName: "Reebok",
+  },
+  {
+    iconSrc: "./src/assets/icons/newbalance.svg",
+    name: "NewBa..",
+    fullName: "Newbalance",
+  },
+  {
+    iconSrc: "./src/assets/icons/converse.svg",
+    name: "Converse",
+    fullName: "Converse",
+  },
+  { iconSrc: "./src/assets/icons/more.svg", name: "More..", fullName: "More" },
 ];
 const createBrandIcons = () => {
   const createBrandElement = (brand) => {
@@ -87,7 +103,7 @@ const createBrandIcons = () => {
       eventListener: [
         {
           event: "click",
-          callback: () => router.navigate(`/Home/${brand.name}`),
+          callback: () => router.navigate(`/Home/${brand.fullName}`),
         },
       ],
     });
@@ -96,7 +112,7 @@ const createBrandIcons = () => {
       element: "div",
       children: [icon],
       className:
-        "w-[60px] bg-[#ECECEC] h-[60px] rounded-full grid items-center justify-center",
+        "w-[60px] bg-[#ECECEC] h-[60px] rounded-full grid items-center justify-center cursor-pointer",
     });
     const brandNames = El({
       element: "p",
@@ -129,7 +145,13 @@ const createFiltration = () => {
   const seeAll = El({
     element: "p",
     children: "See All",
-    className: "font-semibold text-[16px] text-black",
+    className: "font-semibold text-[16px] text-black cursor-pointer",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => router.navigate("/Home/All"),
+      },
+    ],
   });
   const filterHead = El({
     element: "div",
@@ -140,7 +162,13 @@ const createFiltration = () => {
     element: "div",
     children: "All",
     className:
-      "bg-[#343A40] px-[20px]  h-[39px] border-[2px] border-[#343A40] text-white font-semibold text-[16px] items-center grid rounded-[25px]",
+      "bg-[#343A40] px-[20px]  h-[39px] border-[2px] border-[#343A40] text-white font-semibold text-[16px] items-center grid rounded-[25px] cursor-pointer",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => router.navigate("/Home/All"),
+      },
+    ],
   });
   const filterBrand = (brand) => {
     const brandName = El({
@@ -152,7 +180,13 @@ const createFiltration = () => {
       element: "div",
       children: brandName,
       className:
-        "grid bg-transparent border-[2px] border-[#343A40] justify-center items-center px-[20px] h-[39px] rounded-[25px] w-",
+        "grid bg-transparent border-[2px] border-[#343A40] justify-center items-center px-[20px] h-[39px] rounded-[25px] cursor-pointer",
+      eventListener: [
+        {
+          event: "click",
+          callback: () => router.navigate(`/Home/${brand.fullName}`),
+        },
+      ],
     });
     return filterButton;
   };
