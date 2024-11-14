@@ -64,7 +64,7 @@ export default function login() {
         placeholder: "Password",
         id: "pass",
         className:
-          "ml-[4px] bg-transparent h-[37px] w-full order-none outline-none",
+          "ml-[4px] bg-transparent h-[37px] w-full order-none outline-none ",
       }),
       El({
         element: "img",
@@ -86,11 +86,28 @@ export default function login() {
       }),
     ],
     className:
-      "w-full h-[37px] items-center flex bg-[#FAFAFA] px-[13px] rounded-[4px]",
+      "w-full h-[37px] items-center flex bg-[#FAFAFA] px-[13px] rounded-[4px] ",
+  });
+  const rememberMe = El({
+    element: "p",
+    children: "Remember me",
+    className: "font-normal text-[16px]",
+  });
+  const rememberMeBox = El({
+    element: "input",
+    type: "checkbox",
+    id: "remember",
+    className: "w-[16px] h-[16px]",
+  });
+  const remember = El({
+    element: "div",
+    children: [rememberMeBox, rememberMe],
+    className:
+      "mt-[40px] h-[24px] w-[130px] mx-auto flex items-center gap-[8px]",
   });
   const form = El({
     element: "form",
-    children: [inputsEmail, inputsPassword],
+    children: [inputsEmail, inputsPassword, remember],
     className: "grid gap-[21px] mt-[48px] w-[380px]",
   });
   const body = El({
