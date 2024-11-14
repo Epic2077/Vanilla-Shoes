@@ -1,7 +1,10 @@
 import { El } from "../utils/create-element";
 import { getProducts } from "../api/product";
+import { layout } from "../layout/layout";
+import Home from "../templates/home";
 
 const createHeader = () => {
+  document.title = "home page";
   const fav = El({ element: "img", src: "./src/assets/image/heart.svg" });
   const notif = El({ element: "img", src: "./src/assets/image/bell.svg" });
   const icons = El({
@@ -198,7 +201,6 @@ const createProductCard = (product) => {
 const loadProduct = async (productContainer) => {
   try {
     const products = await getProducts();
-    console.log(products);
 
     const productCards = products.map(createProductCard);
     productContainer.append(...productCards);
@@ -213,6 +215,7 @@ const HomePage = () => {
   const search = createSearchBar();
   const brands = createBrandIcons();
   const filter = createFiltration();
+  const layouts = layout(Home());
 
   const productContainer = El({
     element: "div",
@@ -223,7 +226,7 @@ const HomePage = () => {
 
   return El({
     element: "section",
-    children: [header, search, brands, filter, productContainer],
+    children: [header, search, brands, filter, productContainer, layouts],
     className: "px-[24px]",
   });
 };
