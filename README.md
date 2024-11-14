@@ -67,7 +67,7 @@ To set up this project locally, follow these steps:
 
    ```bash
     git clone https://github.com/Epic2077/Vanilla-Shoes-Back-End.git
-    cd Vanilla-Shoes-back-end
+    cd Vanilla-Shoes-Back-End
    ```
 
    Then install the dependencies.
