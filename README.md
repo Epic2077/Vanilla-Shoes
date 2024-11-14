@@ -2,7 +2,11 @@
 
 Welcome to the **Vanilla Shoes e-commerce app**, a modern, visually engaging onboarding experience designed for a high-quality sneakers and shoes e-commerce application. This app aims to provide a seamless and immersive first impression for users, showcasing the brand's dedication to quality, customer satisfaction, and fashion.
 
-## <img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.22.png" width="300px"/> <br/>
+## <img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.22.png" width="150px"/> <br/>
+
+## <img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.33.png" width="150px"/> <br/>
+
+## <img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.52.png" width="150px"/> <br/>
 
 ## 📋 Table of Contents
 
