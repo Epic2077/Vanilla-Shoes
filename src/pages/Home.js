@@ -2,6 +2,7 @@ import { El } from "../utils/create-element";
 import { getProducts } from "../api/product";
 import { layout } from "../layout/layout";
 import Home from "../templates/home";
+import { router } from "../routes/router";
 
 const createHeader = () => {
   document.title = "home page";
@@ -73,9 +74,9 @@ const brandsData = [
   { iconSrc: "./src/assets/icons/puma.svg", name: "Puma" },
   { iconSrc: "./src/assets/icons/asics.svg", name: "Asics" },
   { iconSrc: "./src/assets/icons/reebok.svg", name: "Reebok" },
-  { iconSrc: "./src/assets/icons/newbalance.svg", name: "New Ba.." },
+  { iconSrc: "./src/assets/icons/newbalance.svg", name: "NewBa.." },
   { iconSrc: "./src/assets/icons/converse.svg", name: "Converse" },
-  { iconSrc: "./src/assets/icons/more.svg", name: "More .." },
+  { iconSrc: "./src/assets/icons/more.svg", name: "More.." },
 ];
 const createBrandIcons = () => {
   const createBrandElement = (brand) => {
@@ -86,7 +87,7 @@ const createBrandIcons = () => {
       eventListener: [
         {
           event: "click",
-          callback: () => console.log(`Brand ${brand.name} clicked!`),
+          callback: () => router.navigate(`/Home/${brand.name}`),
         },
       ],
     });
@@ -145,13 +146,13 @@ const createFiltration = () => {
     const brandName = El({
       element: "p",
       children: brand.name,
-      className: "font-semibold text-[16px] text-[#343A40]",
+      className: "font-semibold text-[16px] text-[#343A40] bg-transparent",
     });
     const filterButton = El({
       element: "div",
       children: brandName,
       className:
-        "grid bg-transparent border-[2px] border-[#343A40] justify-center items-center px-[20px] h-[39px] rounded-[25px]",
+        "grid bg-transparent border-[2px] border-[#343A40] justify-center items-center px-[20px] h-[39px] rounded-[25px] w-",
     });
     return filterButton;
   };
