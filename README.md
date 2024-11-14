@@ -63,10 +63,10 @@ To set up this project locally, follow these steps:
    npm run dev
    ```
 4. **Install Back-end**:
-   The back-end of the website is stored in another repo called [Vanilla-Shoes-back-end](#). It contains the api and JSON needed for the project to be fetched using `JSON-server`.
+   The back-end of the website is stored in another repo called [Vanilla-Shoes-back-end](https://github.com/Epic2077/Vanilla-Shoes-Back-End). It contains the api and JSON needed for the project to be fetched using `JSON-server`.
 
    ```bash
-    git clone https://github.com/Epic2077/Vanilla-Shoes-back-end.git
+    git clone https://github.com/Epic2077/Vanilla-Shoes-Back-End.git
     cd Vanilla-Shoes-back-end
    ```
 
