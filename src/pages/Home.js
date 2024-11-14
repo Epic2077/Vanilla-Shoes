@@ -17,7 +17,13 @@ const createHeader = () => {
   const login = El({
     element: "p",
     children: "Login",
-    className: "text[#152536] text-[16px] font-bold",
+    className: "text[#152536] text-[16px] font-bold cursor-pointer",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => router.navigate("/Login"),
+      },
+    ],
   });
   const goodMorning = El({
     element: "p",
