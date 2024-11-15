@@ -97,17 +97,36 @@ export default function login() {
     element: "input",
     type: "checkbox",
     id: "remember",
-    className: "w-[16px] h-[16px]",
+    className: "w-[16px] ",
   });
   const remember = El({
     element: "div",
     children: [rememberMeBox, rememberMe],
     className:
-      "mt-[40px] h-[24px] w-[130px] mx-auto flex items-center gap-[8px]",
+      "mt-[40px] h-[24px] w-[130px] mx-auto flex items-center gap-x-[8px]",
+  });
+  const checkEmail = document.getElementById("email");
+  const checkPass = document.getElementById("pass");
+  const submit = El({
+    element: "input",
+    type: "submit",
+    id: "submit",
+    value: "Sign In",
+    className:
+      "w-full bg-[#212529] h-[47px] font-normal text-[14px] text-white rounded-[30px] mt-[200px] opacity-70 cursor-pointer",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => {
+          if (checkEmail.value.length === 0 || checkPass.value.length === 0) {
+          }
+        },
+      },
+    ],
   });
   const form = El({
     element: "form",
-    children: [inputsEmail, inputsPassword, remember],
+    children: [inputsEmail, inputsPassword, remember, submit],
     className: "grid gap-[21px] mt-[48px] w-[380px]",
   });
   const body = El({
