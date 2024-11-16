@@ -26,10 +26,39 @@ export default async function productCard(productId) {
 
     document.title = product.title;
 
+    const sold = El({
+      element: "div",
+    });
+    const superDetail = El({
+      element: "div",
+      children: [],
+      className: "flex mt-4 gap-[10px]",
+    });
+    const heart = El({
+      element: "img",
+      src: "../../src/assets/icons/heart.svg",
+      className: "w-[35px]",
+    });
+    const title = El({
+      element: "h1",
+      children: product.title,
+      className: "font-bold text-[32px] text-[#152536]",
+    });
+    const header = El({
+      element: "div",
+      children: [title, heart],
+      className: "flex pr-[24px] justify-between mt-[24px]",
+    });
+    const detail = El({
+      element: "section",
+      children: [header, superDetail],
+      className: "grid pl-[24px]",
+    });
+
     const back = El({
       element: "img",
       src: "../../src/assets/icons/back.svg",
-      className: "absolute ml-[24px] mt-[24px]",
+      className: "absolute ml-[24px] mt-[24px] cursor-pointer",
       eventListener: [
         {
           event: "click",
@@ -46,7 +75,7 @@ export default async function productCard(productId) {
     });
     const brandPage = El({
       element: "section",
-      children: [back, img],
+      children: [back, img, detail],
       className: "",
     });
     document.body.innerHTML = "";
