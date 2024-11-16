@@ -1,10 +1,10 @@
 import { baseUrl } from "./config";
 
 //fetch user list
-export async function users() {
+export async function getUsers() {
   const response = await fetch(`${baseUrl}/users`);
-  const data = await response.json();
-  return data.users;
+  const users = await response.json();
+  return users;
 }
 
 //find user by their id

@@ -132,25 +132,38 @@ export default function login() {
             alert("Empty Email or Password!");
             return;
           }
-          const users = await getUsers();
-          const user = users.find((user) => user.email === emailValue);
-          if (!user) {
-            alert(`No Email was found as ${emailValue}`);
-            return;
-          }
+          try {
+            const users = await getUsers();
+            console.log("Fetched users:", users); // Debugging output
 
-          if (user.password !== passValue) {
-            alert("Incorrect Password!");
-            return;
-          }
+            if (!Array.isArray(users)) {
+              throw new Error(
+                "Expected an array of users but received something else."
+              );
+            }
 
-          if (checkRem.checked) {
-            localStorage.setItem("user", user.name);
-          } else {
-            sessionStorage.setItem("user", user.name);
-          }
+            const user = users.find((u) => u.email === emailValue);
 
-          router.navigate("/Home");
+            if (!user) {
+              alert(`No Email was found as ${emailValue}`);
+              return;
+            }
+            if (user.password !== passValue) {
+              alert("Incorrect Password!");
+              return;
+            }
+
+            if (document.getElementById("remember").checked) {
+              localStorage.setItem("user", user.name);
+            } else {
+              sessionStorage.setItem("user", user.name);
+            }
+
+            router.navigate("/Home");
+          } catch (error) {
+            console.error("Error during login:", error);
+            alert("Something went wrong. Please try again later.");
+          }
         },
       },
     ],

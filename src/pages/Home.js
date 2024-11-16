@@ -13,10 +13,18 @@ const createHeader = () => {
     children: [notif, fav],
     className: "flex w-[24px] gap-[16px] ml-[120px]",
   });
-
+  const userName =
+    localStorage.getItem("user") || sessionStorage.getItem("user");
+  function loginName() {
+    if (userName) {
+      return userName;
+    } else {
+      return "Login";
+    }
+  }
   const login = El({
     element: "p",
-    children: "Login",
+    children: loginName(),
     className: "text[#152536] text-[16px] font-bold cursor-pointer",
     eventListener: [
       {
