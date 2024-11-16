@@ -123,7 +123,6 @@ export default function login() {
 
           const checkEmail = document.getElementById("email");
           const checkPass = document.getElementById("pass");
-          const checkRem = document.getElementById("remember");
 
           const emailValue = checkEmail?.value.trim();
           const passValue = checkPass?.value.trim();
@@ -134,7 +133,7 @@ export default function login() {
           }
           try {
             const users = await getUsers();
-            console.log("Fetched users:", users); // Debugging output
+            console.log("Fetched users:", users);
 
             if (!Array.isArray(users)) {
               throw new Error(
