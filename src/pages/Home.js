@@ -243,7 +243,14 @@ const createProductCard = (product) => {
   const card = El({
     element: "div",
     children: [imgBox, names, price],
-    className: `w-[128px]  grid ${product.brand} mb-[8px]`,
+    id: product.id,
+    className: `  grid ${product.brand} mb-[8px] cursor-pointer`,
+    eventListener: [
+      {
+        event: "click",
+        callback: () => router.navigate(`/Home/products/${product.id}`),
+      },
+    ],
   });
   return card;
 };
