@@ -271,7 +271,7 @@ const HomePage = () => {
   const search = createSearchBar();
   const brands = createBrandIcons();
   const filter = createFiltration();
-  const layouts = layout(Home());
+  const layouts = layout();
 
   const productContainer = El({
     element: "div",

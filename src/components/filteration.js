@@ -1,23 +1,12 @@
 import { El } from "../utils/create-element";
 import { getProducts } from "../api/product";
 import { router } from "../routes/router";
+import { layoutBack } from "../layout/layout";
 
 export function filtered(brandName) {
   document.title = brandName;
 
-  const back = El({
-    element: "img",
-    src: "../src/assets/icons/back.svg",
-    className: "cursor-pointer",
-    eventListener: [
-      {
-        event: "click",
-        callback: () => {
-          router.navigate("/Home");
-        },
-      },
-    ],
-  });
+  const goBack = layoutBack();
   const title = El({
     element: "h1",
     children: brandName,
@@ -25,7 +14,7 @@ export function filtered(brandName) {
   });
   const header = El({
     element: "div",
-    children: [back, title],
+    children: [goBack, title],
     className: "flex gap-[12px] items-center",
   });
 
