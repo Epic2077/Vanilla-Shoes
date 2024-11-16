@@ -1,7 +1,7 @@
 import { El } from "../utils/create-element";
 import { router } from "../routes/router";
 import { getUsers } from "../api/users";
-import { findUserById } from "../api/users";
+import { removeUserByName } from "../api/users";
 
 export default function login() {
   document.title = "Login";
@@ -153,8 +153,10 @@ export default function login() {
             }
 
             if (document.getElementById("remember").checked) {
+              localStorage.removeItem("user");
               localStorage.setItem("user", user.name);
             } else {
+              sessionStorage.removeItem("user");
               sessionStorage.setItem("user", user.name);
             }
 

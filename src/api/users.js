@@ -1,5 +1,15 @@
 import { baseUrl } from "./config";
 
+export async function removeUserByName(name) {
+  const response = await fetch(`${baseUrl}/users`);
+  const users = await response.json();
+
+  const user = users.find((p) => p.name);
+  await fetch(user, {
+    method: "DELETE",
+  });
+  console.log(`user with the id of ${id} was deleted`);
+}
 //fetch user list
 export async function getUsers() {
   const response = await fetch(`${baseUrl}/users`);
@@ -39,12 +49,6 @@ export async function addUser() {
 }
 
 //delete a user by their id
-export async function removeUserById(id) {
-  await fetch(`${baseUrl}/users/${id}`, {
-    method: "DELETE",
-  });
-  console.log(`user with the id of ${id} was deleted`);
-}
 
 //delete all users
 export async function deleteAllUsers() {
