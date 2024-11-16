@@ -1,5 +1,7 @@
 import { El } from "../utils/create-element";
 import { router } from "../routes/router";
+import { getUsers } from "../api/users";
+import { findUserById } from "../api/users";
 
 export default function login() {
   document.title = "Login";
@@ -105,8 +107,7 @@ export default function login() {
     className:
       "mt-[40px] h-[24px] w-[130px] mx-auto flex items-center gap-x-[8px]",
   });
-  const checkEmail = document.getElementById("email");
-  const checkPass = document.getElementById("pass");
+
   const submit = El({
     element: "input",
     type: "submit",
@@ -117,9 +118,39 @@ export default function login() {
     eventListener: [
       {
         event: "click",
-        callback: () => {
-          if (checkEmail.value.length === 0 || checkPass.value.length === 0) {
+        callback: async (event) => {
+          event.preventDefault();
+
+          const checkEmail = document.getElementById("email");
+          const checkPass = document.getElementById("pass");
+          const checkRem = document.getElementById("remember");
+
+          const emailValue = checkEmail?.value.trim();
+          const passValue = checkPass?.value.trim();
+
+          if (!emailValue || !passValue) {
+            alert("Empty Email or Password!");
+            return;
           }
+          const users = await getUsers();
+          const user = users.find((user) => user.email === emailValue);
+          if (!user) {
+            alert(`No Email was found as ${emailValue}`);
+            return;
+          }
+
+          if (user.password !== passValue) {
+            alert("Incorrect Password!");
+            return;
+          }
+
+          if (checkRem.checked) {
+            localStorage.setItem("user", user.name);
+          } else {
+            sessionStorage.setItem("user", user.name);
+          }
+
+          router.navigate("/Home");
         },
       },
     ],

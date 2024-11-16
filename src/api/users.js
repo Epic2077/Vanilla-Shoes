@@ -3,8 +3,8 @@ import { baseUrl } from "./config";
 //fetch user list
 export async function users() {
   const response = await fetch(`${baseUrl}/users`);
-  const user = await response.json();
-  return user;
+  const data = await response.json();
+  return data.users;
 }
 
 //find user by their id
