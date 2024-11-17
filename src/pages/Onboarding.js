@@ -32,7 +32,7 @@ export default function OnBoardingPage() {
     element: "section",
     children: container,
   });
-
+  //Page TimeOuts
   setTimeout(() => {
     container.replaceWith(welcome());
   }, 3000);
