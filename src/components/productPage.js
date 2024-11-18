@@ -25,13 +25,33 @@ export default async function productCard(productId) {
     }
 
     document.title = product.title;
-
+    const hr = El({
+      element: "hr",
+      className: "my-5 mx-[24px] h-[10px]",
+    });
+    const reviews = El({
+      element: "p",
+      children: "0 (No reviews)",
+      className: "text-[16px] text-[#152536]",
+    });
+    const star = El({
+      element: "img",
+      src: "../../src/assets/icons/star.svg",
+      className: "w-[25px]",
+    });
+    const rating = El({
+      element: "div",
+      children: [star, reviews],
+      className: "flex gap-4 ml-4 items-center",
+    });
     const sold = El({
       element: "div",
+      children: `${product.order} sold`,
+      className: "bg-slate-200 px-[10px] py-[5px] rounded-[5px]",
     });
     const superDetail = El({
       element: "div",
-      children: [],
+      children: [sold, rating],
       className: "flex mt-4 gap-[10px]",
     });
     const heart = El({
@@ -75,7 +95,7 @@ export default async function productCard(productId) {
     });
     const brandPage = El({
       element: "section",
-      children: [back, img, detail],
+      children: [back, img, detail, hr],
       className: "",
     });
     document.body.innerHTML = "";
