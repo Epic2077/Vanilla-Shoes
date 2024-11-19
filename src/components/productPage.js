@@ -26,6 +26,24 @@ export default async function productCard(productId) {
 
     document.title = product.title;
 
+    //Quantity set
+    let i = 1;
+    const quantityBox = El({
+      element: "div",
+      children: [],
+      className: "px-[5px] py-[2px] flex gap-[15px] bg-slate-500",
+    });
+    const quantityTitle = El({
+      element: "h3",
+      children: "Quantity",
+      className: "text-[24px] font-semibold",
+    });
+    const quantity = El({
+      element: "div",
+      children: [quantityTitle, quantityBox],
+      className: "flex gap-4 items-center mt-[24px]",
+    });
+
     //Renders the sizes on the product page.
     function renderSize() {
       const size = product.size; // Assuming `product.size` is an array of sizes
@@ -69,8 +87,8 @@ export default async function productCard(productId) {
       const colorElement = colors.map((color) => {
         const colorOption = El({
           element: "div",
-          children: [],
-          className: `bg-${color} w-[40px] h-[40px] `,
+          children: "",
+          className: ` w-[40px] h-[40px] rounded-full bg-${color}-700`,
           eventListener: [
             {
               event: "click",
@@ -80,7 +98,8 @@ export default async function productCard(productId) {
                   cl.classList.remove("border-[2px]", "border-black")
                 );
 
-                colorElement.classList.add("border-[2px] border-black");
+                event.target.classList.add("border-[2px]", "border-black");
+                selectedColor = color;
               },
             },
           ],
@@ -107,7 +126,7 @@ export default async function productCard(productId) {
     const colorBox = El({
       element: "div",
       children: colorElement,
-      className: "flex gap-[10px] overflow-y-scroll",
+      className: "flex gap-[10px] ",
     });
     const color = El({
       element: "div",
@@ -119,6 +138,7 @@ export default async function productCard(productId) {
         }),
         colorBox,
       ],
+      className: "grid gap-[15px]",
     });
 
     const sizeBox = El({
@@ -142,7 +162,7 @@ export default async function productCard(productId) {
     const options = El({
       element: "div",
       children: [size, color],
-      className: "flex mt-[10px] gap-[20px]",
+      className: "flex mt-[10px] gap-[40px]",
     });
     const span = El({
       element: "span",
@@ -213,7 +233,7 @@ export default async function productCard(productId) {
     });
     const detail = El({
       element: "section",
-      children: [header, superDetail, hr, description, options],
+      children: [header, superDetail, hr, description, options, quantity],
       className: "grid pl-[24px]",
     });
 
