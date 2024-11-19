@@ -25,19 +25,93 @@ export default async function productCard(productId) {
     }
 
     document.title = product.title;
-
-    //Quantity set
     let i = 1;
-    const quantityBox = El({
+
+    const addToCartBtn = El({
       element: "div",
       children: [],
-      className: "px-[5px] py-[2px] flex gap-[15px] bg-slate-500",
+      className: "px-[10px] py-[5px]",
     });
+    const priceNum = El({
+      element: "h3",
+      children: `$${product.price * i}.00`,
+      className: "text-[32px] font-semibold",
+    });
+    const totalPrice = El({
+      element: "p",
+      children: "Total price",
+      className: "text-[#152536a6] text-[14px]",
+    });
+    const price = El({
+      element: "div",
+      children: [totalPrice, priceNum],
+      className: "grid",
+    });
+    const cart = El({
+      element: "div",
+      children: [price],
+      className: "flex gap-[15px]",
+    });
+
+    //Quantity set
+
+    function createQuantityBox() {
+      const quantityValue = El({
+        element: "p",
+        children: i,
+        className: "text-center",
+      });
+
+      const quantityBox = El({
+        element: "div",
+        children: [
+          El({
+            element: "p",
+            children: "-",
+            className: "cursor-pointer",
+            eventListener: [
+              {
+                event: "click",
+                callback: () => {
+                  if (i > 1) {
+                    // Prevent negative values
+                    i--;
+                    quantityValue.textContent = i; // Update the DOM
+                  }
+                },
+              },
+            ],
+          }),
+          quantityValue, // Reference to the quantity display
+          El({
+            element: "p",
+            children: "+",
+            className: "cursor-pointer",
+            eventListener: [
+              {
+                event: "click",
+                callback: () => {
+                  i++;
+                  quantityValue.textContent = i; // Update the DOM
+                },
+              },
+            ],
+          }),
+        ],
+        className:
+          "px-[30px] py-[10px] flex gap-[30px] bg-slate-200 text-[24px] font-semibold rounded-3xl",
+      });
+
+      return quantityBox;
+    }
+
     const quantityTitle = El({
       element: "h3",
       children: "Quantity",
       className: "text-[24px] font-semibold",
     });
+
+    const quantityBox = createQuantityBox();
     const quantity = El({
       element: "div",
       children: [quantityTitle, quantityBox],
@@ -189,7 +263,11 @@ export default async function productCard(productId) {
     });
     const hr = El({
       element: "hr",
-      className: "my-5",
+      className: "my-5 mr-4",
+    });
+    const hr2 = El({
+      element: "hr",
+      className: "my-3 mr-4",
     });
     const reviews = El({
       element: "p",
@@ -233,7 +311,16 @@ export default async function productCard(productId) {
     });
     const detail = El({
       element: "section",
-      children: [header, superDetail, hr, description, options, quantity],
+      children: [
+        header,
+        superDetail,
+        hr,
+        description,
+        options,
+        quantity,
+        hr2,
+        cart,
+      ],
       className: "grid pl-[24px]",
     });
 
@@ -253,7 +340,7 @@ export default async function productCard(productId) {
     const img = El({
       element: "img",
       src: product.images,
-      className: "h-[400px] w-screen",
+      className: "h-[380px] w-screen",
     });
     const brandPage = El({
       element: "section",
