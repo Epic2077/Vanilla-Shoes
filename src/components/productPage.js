@@ -26,6 +26,7 @@ export default async function productCard(productId) {
 
     document.title = product.title;
 
+    //Renders the sizes on the product page.
     function renderSize() {
       const size = product.size; // Assuming `product.size` is an array of sizes
       let selectedSize = size[size.length - 1]; // Default to the last size
@@ -40,7 +41,7 @@ export default async function productCard(productId) {
             {
               event: "click",
               callback: () => {
-                console.log(" event working");
+                console.log("size event working");
                 // Deselect all sizes
                 sizeElements.forEach((el) =>
                   el.classList.remove("bg-black", "text-white")
@@ -60,17 +61,72 @@ export default async function productCard(productId) {
       return { sizeElements, selectedSize };
     }
 
+    //Renders the colors on the product page.
+    function renderColors() {
+      const colors = product.color;
+      let selectedColor = colors[colors.length - 1];
+
+      const colorElement = colors.map((color) => {
+        const colorOption = El({
+          element: "div",
+          children: [],
+          className: `bg-${color} w-[40px] h-[40px] `,
+          eventListener: [
+            {
+              event: "click",
+              callback: () => {
+                console.log("color event working");
+                colorElement.forEach((cl) =>
+                  cl.classList.remove("border-[2px]", "border-black")
+                );
+
+                colorElement.classList.add("border-[2px] border-black");
+              },
+            },
+          ],
+        });
+        return colorOption;
+      });
+      return { colorElement, selectedColor };
+    }
+
+    const { colorElement, selectedColor } = renderColors();
+
     const { sizeElements, selectedSize } = renderSize();
-    const sizeBox = El({
-      element: "div",
-      children: sizeElements,
-      className: "flex gap-[10px]",
-    });
     function noSize() {
       if (!selectedSize) {
         console.log("No size selected, using default:", selectedSize);
       }
     }
+    function noColor() {
+      if (!selectedColor) {
+        console.log("No size selected, using default:", selectedColor);
+      }
+    }
+
+    const colorBox = El({
+      element: "div",
+      children: colorElement,
+      className: "flex gap-[10px] overflow-y-scroll",
+    });
+    const color = El({
+      element: "div",
+      children: [
+        El({
+          element: "p",
+          children: "Colors",
+          className: "text-[24px] font-semibold",
+        }),
+        colorBox,
+      ],
+    });
+
+    const sizeBox = El({
+      element: "div",
+      children: sizeElements,
+      className: "flex gap-[10px]",
+    });
+
     const size = El({
       element: "div",
       children: [
@@ -85,8 +141,8 @@ export default async function productCard(productId) {
     });
     const options = El({
       element: "div",
-      children: [size],
-      className: "flex mt-[10px]",
+      children: [size, color],
+      className: "flex mt-[10px] gap-[20px]",
     });
     const span = El({
       element: "span",
