@@ -26,14 +26,79 @@ export default async function productCard(productId) {
 
     document.title = product.title;
 
+    function renderSize() {
+      const size = product.size; // Assuming `product.size` is an array of sizes
+      let selectedSize = size[size.length - 1]; // Default to the last size
+
+      const sizeElements = size.map((num) => {
+        const sizeOption = El({
+          element: "div",
+          children: num,
+          className:
+            " border-[2px] border-slate-500 text-[18px] text-[#152536a6] rounded-full w-[40px] h-[40px] grid justify-center items-center cursor-pointer",
+          eventListener: [
+            {
+              event: "click",
+              callback: () => {
+                console.log(" event working");
+                // Deselect all sizes
+                sizeElements.forEach((el) =>
+                  el.classList.remove("bg-black", "text-white")
+                );
+
+                // Highlight the selected size
+                sizeOption.classList.add("bg-black", "text-white");
+                sizeOption.classList.remove("text-[#152536a6]");
+                selectedSize = num;
+              },
+            },
+          ],
+        });
+        return sizeOption;
+      });
+
+      return { sizeElements, selectedSize };
+    }
+
+    const { sizeElements, selectedSize } = renderSize();
+    const sizeBox = El({
+      element: "div",
+      children: sizeElements,
+      className: "flex gap-[10px]",
+    });
+    function noSize() {
+      if (!selectedSize) {
+        console.log("No size selected, using default:", selectedSize);
+      }
+    }
+    const size = El({
+      element: "div",
+      children: [
+        El({
+          element: "h3",
+          children: "Size",
+          className: "text-[24px] font-semibold",
+        }),
+        sizeBox,
+      ],
+      className: "grid gap-[15px]",
+    });
     const options = El({
       element: "div",
-      children: [],
-      className: "flex",
+      children: [size],
+      className: "flex mt-[10px]",
+    });
+    const span = El({
+      element: "span",
+      children: "view more..",
+      className: "text-[#152536] font-semibold",
     });
     const descriptionText = El({
       element: "p",
-      children: `Lorem ipsum dolor sit amet, consectrtur adipiscing elit, sed do ejusmod tempor incididunt ut labore et view more..`,
+      children: [
+        `Lorem ipsum dolor sit amet, consectrtur adipiscing elit, sed do ejusmod tempor incididunt ut labore et `,
+        span,
+      ],
       className: "text-[#152536a6] text-[15px]",
     });
     const descriptionTitle = El({
@@ -92,7 +157,7 @@ export default async function productCard(productId) {
     });
     const detail = El({
       element: "section",
-      children: [header, superDetail, hr, description],
+      children: [header, superDetail, hr, description, options],
       className: "grid pl-[24px]",
     });
 
