@@ -29,8 +29,19 @@ export default async function productCard(productId) {
 
     const addToCartBtn = El({
       element: "div",
-      children: [],
-      className: "px-[10px] py-[5px]",
+      children: [
+        El({
+          element: "img",
+          src: "../../src/assets/icons/cart-white.svg",
+        }),
+        El({
+          element: "h3",
+          children: "Add to Cart",
+          className: "text-[20px] font-semibold",
+        }),
+      ],
+      className:
+        "px-[25px] py-[10px] bg-black flex justify-center items-center text-white gap-[15px] h-[90%] rounded-[50px] w-[220px]",
     });
     const priceNum = El({
       element: "h3",
@@ -49,8 +60,8 @@ export default async function productCard(productId) {
     });
     const cart = El({
       element: "div",
-      children: [price],
-      className: "flex gap-[15px]",
+      children: [price, addToCartBtn],
+      className: "flex gap-[35px] items-center",
     });
 
     //Quantity set
