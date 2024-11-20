@@ -2,6 +2,8 @@ import { El } from "../utils/create-element";
 import { getProductById } from "../api/product";
 import { router } from "../routes/router";
 import { layoutBack } from "../layout/layout";
+import renderColors from "./productFunction/render-color";
+export let exportedProduct = null;
 
 export default async function productCard(productId) {
   if (!productId) {
@@ -17,12 +19,15 @@ export default async function productCard(productId) {
   }
   try {
     const product = await getProductById(productId);
-    console.table(product);
+
+    // console.table(product);
 
     if (!product) {
       console.error(`Product not found for ID: ${productId}`);
       return;
     }
+
+    exportedProduct = product;
 
     document.title = product.title;
     let i = 1;
@@ -180,36 +185,6 @@ export default async function productCard(productId) {
     }
 
     //Renders the colors on the product page.
-    function renderColors() {
-      const colors = product.color;
-      let selectedColor = colors[colors.length - 1];
-
-      const colorElement = colors.map((color) => {
-        const colorOption = El({
-          element: "div",
-          children: "",
-          className: ` w-[40px] h-[40px] rounded-full bg-${color}-700`,
-          eventListener: [
-            {
-              event: "click",
-              callback: () => {
-                console.log("color event working");
-                colorElement.forEach((cl) =>
-                  cl.classList.remove("border-[2px]", "border-black")
-                );
-
-                event.target.classList.add("border-[2px]", "border-black");
-                selectedColor = color;
-              },
-            },
-          ],
-        });
-        return colorOption;
-      });
-      return { colorElement, selectedColor };
-    }
-
-    const { colorElement, selectedColor } = renderColors();
 
     const { sizeElements, selectedSize } = renderSize();
     function noSize() {
@@ -222,7 +197,7 @@ export default async function productCard(productId) {
         console.log("No size selected, using default:", selectedColor);
       }
     }
-
+    const { colorElement, selectedColor } = await renderColors();
     const colorBox = El({
       element: "div",
       children: colorElement,
