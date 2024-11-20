@@ -6,6 +6,7 @@ import renderColors from "./productFunction/render-color";
 export let exportedProduct = null;
 import priceCalc from "./productFunction/priceNum";
 import quantityFunc from "./productFunction/create-quantity";
+import renderSizes from "./productFunction/render-size";
 
 export default async function productCard(productId) {
   if (!productId) {
@@ -83,44 +84,8 @@ export default async function productCard(productId) {
       className: "flex gap-4 items-center mt-[24px]",
     });
 
-    //Renders the sizes on the product page.
-    function renderSize() {
-      const size = product.size; // Assuming `product.size` is an array of sizes
-      let selectedSize = size[size.length - 1]; // Default to the last size
-
-      const sizeElements = size.map((num) => {
-        const sizeOption = El({
-          element: "div",
-          children: num,
-          className:
-            " border-[2px] border-slate-500 text-[18px] text-[#152536a6] rounded-full w-[40px] h-[40px] grid justify-center items-center cursor-pointer",
-          eventListener: [
-            {
-              event: "click",
-              callback: () => {
-                console.log("size event working");
-                // Deselect all sizes
-                sizeElements.forEach((el) =>
-                  el.classList.remove("bg-black", "text-white")
-                );
-
-                // Highlight the selected size
-                sizeOption.classList.add("bg-black", "text-white");
-                sizeOption.classList.remove("text-[#152536a6]");
-                selectedSize = num;
-              },
-            },
-          ],
-        });
-        return sizeOption;
-      });
-
-      return { sizeElements, selectedSize };
-    }
-
     //Renders the colors on the product page.
 
-    const { sizeElements, selectedSize } = renderSize();
     function noSize() {
       if (!selectedSize) {
         console.log("No size selected, using default:", selectedSize);
@@ -132,6 +97,7 @@ export default async function productCard(productId) {
       }
     }
     const { colorElement, selectedColor } = await renderColors();
+    const { sizeElements, selectedSize } = await renderSizes();
     const colorBox = El({
       element: "div",
       children: colorElement,
