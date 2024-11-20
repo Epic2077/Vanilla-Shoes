@@ -7,6 +7,7 @@ export let exportedProduct = null;
 import priceCalc from "./productFunction/priceNum";
 import quantityFunc from "./productFunction/create-quantity";
 import renderSizes from "./productFunction/render-size";
+import getId from "./productFunction/sendData";
 
 export default async function productCard(productId) {
   if (!productId) {
@@ -15,6 +16,7 @@ export default async function productCard(productId) {
   }
 
   console.log(productId);
+  getId(productId);
 
   if (![productId]) {
     console.error("Invalid product URL. Unable to extract product ID.");
