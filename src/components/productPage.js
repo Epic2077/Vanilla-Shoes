@@ -26,6 +26,13 @@ export default async function productCard(productId) {
 
     document.title = product.title;
     let i = 1;
+    let totalPriceNum = product.price * i;
+
+    //Update total price dynamically
+    function updateTotalPrice(priceNumElement) {
+      totalPrice = product.price * i;
+      priceNumElement.textContent = `$${totalPrice}.00`;
+    }
 
     const addToCartBtn = El({
       element: "div",
@@ -42,12 +49,23 @@ export default async function productCard(productId) {
       ],
       className:
         "px-[25px] py-[10px] bg-black flex justify-center items-center text-white gap-[15px] h-[90%] rounded-[50px] w-[220px]",
+      id: "ad-to-cart",
     });
-    const priceNum = El({
-      element: "h3",
-      children: `$${product.price * i}.00`,
-      className: "text-[32px] font-semibold",
-    });
+
+    function PriceNumBox() {
+      totalPriceNum = product.price * i;
+      console.log(totalPriceNum);
+      const priceNum = El({
+        element: "h3",
+        children: `$${totalPriceNum}.00`,
+        className: "text-[32px] font-semibold",
+        id: "total-price",
+      });
+      return priceNum;
+    }
+
+    const priceNum = PriceNumBox();
+    const priceQuantity = updateTotalPrice();
     const totalPrice = El({
       element: "p",
       children: "Total price",
@@ -55,7 +73,7 @@ export default async function productCard(productId) {
     });
     const price = El({
       element: "div",
-      children: [totalPrice, priceNum],
+      children: [totalPrice, priceNum, priceQuantity],
       className: "grid",
     });
     const cart = El({
@@ -71,6 +89,7 @@ export default async function productCard(productId) {
         element: "p",
         children: i,
         className: "text-center",
+        id: "quantity",
       });
 
       const quantityBox = El({
