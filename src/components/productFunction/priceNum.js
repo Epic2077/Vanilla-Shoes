@@ -1,12 +1,17 @@
 import { El } from "../../utils/create-element";
-import productCard, { exportedProduct, exportedI } from "../productPage";
+import productCard, { exportedProduct } from "../productPage";
 
-export default async function priceCalc() {
+export default async function priceCalc(i) {
   await productCard();
   const product = exportedProduct;
-  const i = exportedI;
+  console.log(i);
   let totalPriceNum;
-  totalPriceNum = product.price * i;
+  if (typeof i !== "number") {
+    totalPriceNum = product.price;
+  } else {
+    totalPriceNum = product.price * i;
+  }
+  console.log(parseInt(i));
   console.log(totalPriceNum);
   const priceNum = El({
     element: "h3",

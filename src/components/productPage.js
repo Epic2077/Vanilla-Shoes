@@ -4,8 +4,8 @@ import { router } from "../routes/router";
 import { layoutBack } from "../layout/layout";
 import renderColors from "./productFunction/render-color";
 export let exportedProduct = null;
-export let exportedI = null;
 import priceCalc from "./productFunction/priceNum";
+import quantityFunc from "./productFunction/create-quantity";
 
 export default async function productCard(productId) {
   if (!productId) {
@@ -32,8 +32,6 @@ export default async function productCard(productId) {
     exportedProduct = product;
 
     document.title = product.title;
-    let i = 1;
-    exportedI = i;
 
     const addToCartBtn = El({
       element: "div",
@@ -72,64 +70,13 @@ export default async function productCard(productId) {
 
     //Quantity set
 
-    function createQuantityBox() {
-      const quantityValue = El({
-        element: "p",
-        children: i,
-        className: "text-center",
-        id: "quantity",
-      });
-
-      const quantityBox = El({
-        element: "div",
-        children: [
-          El({
-            element: "p",
-            children: "-",
-            className: "cursor-pointer",
-            eventListener: [
-              {
-                event: "click",
-                callback: () => {
-                  if (i > 1) {
-                    // Prevent negative values
-                    i--;
-                    quantityValue.textContent = i; // Update the DOM
-                  }
-                },
-              },
-            ],
-          }),
-          quantityValue, // Reference to the quantity display
-          El({
-            element: "p",
-            children: "+",
-            className: "cursor-pointer",
-            eventListener: [
-              {
-                event: "click",
-                callback: () => {
-                  i++;
-                  quantityValue.textContent = i; // Update the DOM
-                },
-              },
-            ],
-          }),
-        ],
-        className:
-          "px-[30px] py-[10px] flex gap-[30px] bg-slate-200 text-[24px] font-semibold rounded-3xl",
-      });
-
-      return quantityBox;
-    }
-
     const quantityTitle = El({
       element: "h3",
       children: "Quantity",
       className: "text-[24px] font-semibold",
     });
 
-    const quantityBox = createQuantityBox();
+    const quantityBox = await quantityFunc();
     const quantity = El({
       element: "div",
       children: [quantityTitle, quantityBox],
