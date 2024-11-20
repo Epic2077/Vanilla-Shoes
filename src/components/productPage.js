@@ -8,6 +8,7 @@ import priceCalc from "./productFunction/priceNum";
 import quantityFunc from "./productFunction/create-quantity";
 import renderSizes from "./productFunction/render-size";
 import getId from "./productFunction/sendData";
+import { getQuantity } from "./productFunction/sendData";
 
 export default async function productCard(productId) {
   if (!productId) {
@@ -35,6 +36,7 @@ export default async function productCard(productId) {
     exportedProduct = product;
 
     document.title = product.title;
+    const quantityBox = await quantityFunc();
 
     const addToCartBtn = El({
       element: "div",
@@ -52,6 +54,15 @@ export default async function productCard(productId) {
       className:
         "px-[25px] py-[10px] bg-black flex justify-center items-center text-white gap-[15px] h-[90%] rounded-[50px] w-[220px]",
       id: "ad-to-cart",
+      eventListener: [
+        {
+          event: "click",
+          callback: () => {
+            getId(productId);
+            getQuantity();
+          },
+        },
+      ],
     });
 
     const priceNum = await priceCalc();
@@ -79,7 +90,6 @@ export default async function productCard(productId) {
       className: "text-[24px] font-semibold",
     });
 
-    const quantityBox = await quantityFunc();
     const quantity = El({
       element: "div",
       children: [quantityTitle, quantityBox],
@@ -201,11 +211,13 @@ export default async function productCard(productId) {
       element: "img",
       src: "../../src/assets/icons/heart.svg",
       className: "w-[35px]",
+      id: "product-img",
     });
     const title = El({
       element: "h1",
       children: product.title,
       className: "font-bold text-[32px] text-[#152536]",
+      id: "product-title",
     });
     const header = El({
       element: "div",

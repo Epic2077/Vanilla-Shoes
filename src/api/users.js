@@ -47,7 +47,20 @@ export async function addUser() {
     }),
   });
 }
-
+// Add to cart
+export async function addToCart(user, id, quantity, cost, color, size) {
+  let userCart = await users();
+  fetch(`${baseUrl}/users/${user}`, {
+    moethod: "POST",
+    body: JSON.stringify({
+      cart: [
+        {
+          productId: ``,
+        },
+      ],
+    }),
+  });
+}
 //delete a user by their id
 
 //delete all users
