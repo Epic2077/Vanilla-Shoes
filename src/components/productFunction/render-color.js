@@ -4,7 +4,7 @@ import productCard, { exportedProduct } from "../productPage";
 export default async function renderColors() {
   await productCard();
   const product = exportedProduct;
-  console.table(product);
+  // console.table(product);
   const colors = product.color;
   let selectedColor = colors[colors.length - 1];
 

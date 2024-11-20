@@ -4,6 +4,8 @@ import { router } from "../routes/router";
 import { layoutBack } from "../layout/layout";
 import renderColors from "./productFunction/render-color";
 export let exportedProduct = null;
+export let exportedI = null;
+import priceCalc from "./productFunction/priceNum";
 
 export default async function productCard(productId) {
   if (!productId) {
@@ -31,6 +33,7 @@ export default async function productCard(productId) {
 
     document.title = product.title;
     let i = 1;
+    exportedI = i;
 
     const addToCartBtn = El({
       element: "div",
@@ -49,24 +52,8 @@ export default async function productCard(productId) {
         "px-[25px] py-[10px] bg-black flex justify-center items-center text-white gap-[15px] h-[90%] rounded-[50px] w-[220px]",
       id: "ad-to-cart",
     });
-    let totalPriceNum;
-    function PriceNumBox() {
-      totalPriceNum = product.price * i;
-      console.log(totalPriceNum);
-      const priceNum = El({
-        element: "h3",
-        children: `$${totalPriceNum}.00`,
-        className: "text-[32px] font-semibold",
-        id: "total-price",
-      });
-      return priceNum;
-    }
-    function updateTotalPrice(priceNumElement) {
-      totalPrice = product.price * i;
-      priceNumElement.textContent = `$${totalPrice}.00`;
-    }
 
-    const priceNum = PriceNumBox();
+    const priceNum = await priceCalc();
     const totalPrice = El({
       element: "p",
       children: "Total price",
