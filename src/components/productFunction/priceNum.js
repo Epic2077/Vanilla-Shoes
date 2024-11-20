@@ -21,7 +21,3 @@ export default async function priceCalc(i) {
   });
   return priceNum;
 }
-// function updateTotalPrice(priceNumElement) {
-//   totalPrice = product.price * i;
-//   priceNumElement.textContent = `$${totalPrice}.00`;
-// }
