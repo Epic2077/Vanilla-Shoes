@@ -48,13 +48,13 @@ export async function addUser() {
   });
 }
 // Add to cart
-export async function addToCart(id, quantity, cost, color, size) {
+export async function addToCart(product) {
   try {
     function getUser() {
-      let user = localStorage.getItem("user");
+      let user = localStorage.getItem("userId");
       console.log(user);
       if (!user) {
-        user = sessionStorage.getItem("user");
+        user = sessionStorage.getItem("userId");
         if (!user) {
           router.navigate("/Login");
         }
@@ -69,24 +69,11 @@ export async function addToCart(id, quantity, cost, color, size) {
         "Content-Type": "application/json", // Added required header
       },
       body: JSON.stringify({
-        cart: [
-          {
-            productId: id,
-            productQuantity: quantity,
-            productCost: cost,
-            productColor: color,
-            productSize: size,
-          },
-        ],
+        cart: [product],
       }),
     });
 
     // Check if the response is okay
-    if (!response.ok) {
-      throw new Error(
-        `Failed to add to cart: ${response.status} ${response.statusText}`
-      );
-    }
 
     console.log("Item added to cart successfully");
 

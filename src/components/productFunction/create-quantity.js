@@ -1,7 +1,6 @@
 import { El } from "../../utils/create-element";
 import productCard, { exportedProduct } from "../productPage";
 import priceCalc from "./priceNum";
-import { getQuantity } from "./sendData";
 
 export default async function quantityFunc() {
   let i = 1;

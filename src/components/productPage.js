@@ -1,13 +1,14 @@
 import { El } from "../utils/create-element";
 import { getProductById } from "../api/product";
 import { router } from "../routes/router";
-import { layoutBack } from "../layout/layout";
+
 import renderColors from "./productFunction/render-color";
 export let exportedProduct = null;
 import priceCalc from "./productFunction/priceNum";
 import quantityFunc from "./productFunction/create-quantity";
 import renderSizes from "./productFunction/render-size";
 import { getColor, getSize } from "./productFunction/sendData";
+import { addToCart } from "../api/users";
 
 export default async function productCard(productId) {
   if (!productId) {
@@ -74,16 +75,24 @@ export default async function productCard(productId) {
         {
           event: "click",
           callback: () => {
-            console.log(`product:`, product);
-            const cartProduct = {
-              ...product,
-              qty: document.getElementById("quantity").textContent,
-              ttlPrice:
-                product.price * document.getElementById("quantity").textContent,
-              selectedColor: getColor(),
-              selectedSize: getSize(),
-            };
-            console.table(cartProduct);
+            let userLogin = localStorage.getItem("userId");
+            let userLoginTemp = sessionStorage.getItem("userId");
+            if (!userLogin || userLoginTemp) {
+              router.navigate("/Login");
+            } else {
+              console.log(`product:`, product);
+              const cartProduct = {
+                ...product,
+                qty: document.getElementById("quantity").textContent,
+                ttlPrice:
+                  product.price *
+                  document.getElementById("quantity").textContent,
+                selectedColor: getColor(),
+                selectedSize: getSize(),
+              };
+              addToCart(cartProduct);
+              console.table(cartProduct);
+            }
           },
         },
       ],

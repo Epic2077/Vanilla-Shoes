@@ -14,7 +14,7 @@ const createHeader = () => {
     className: "flex w-[24px] gap-[16px] ml-[120px]",
   });
   const userName =
-    localStorage.getItem("user") || sessionStorage.getItem("user");
+    localStorage.getItem("userName") || sessionStorage.getItem("userName");
   function loginName() {
     if (userName) {
       return userName;

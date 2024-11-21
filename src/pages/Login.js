@@ -153,11 +153,15 @@ export default function login() {
             }
 
             if (document.getElementById("remember").checked) {
-              localStorage.removeItem("user");
-              localStorage.setItem("user", user.name);
+              localStorage.removeItem("userId");
+              localStorage.removeItem("userName");
+              localStorage.setItem("userId", user.id);
+              localStorage.setItem("userName", user.name);
             } else {
-              sessionStorage.removeItem("user");
-              sessionStorage.setItem("user", user.name);
+              sessionStorage.removeItem("userId");
+              sessionStorage.removeItem("userName");
+              sessionStorage.setItem("userId", user.id);
+              sessionStorage.setItem("userName", user.name);
             }
 
             router.navigate("/Home");
