@@ -49,17 +49,44 @@ export async function addUser() {
 }
 // Add to cart
 export async function addToCart(user, id, quantity, cost, color, size) {
-  let userCart = await users();
-  fetch(`${baseUrl}/users/${user}`, {
-    moethod: "POST",
-    body: JSON.stringify({
-      cart: [
-        {
-          productId: ``,
-        },
-      ],
-    }),
-  });
+  try {
+    const response = await fetch(`${baseUrl}/users`);
+    const foundUsers = await response.json();
+
+    let foundUser = foundUsers.find((p) => p.name === user);
+    await fetch(foundUser, {
+      method: "POST", // Fixed typo
+      headers: {
+        "Content-Type": "application/json", // Added required header
+      },
+      body: JSON.stringify({
+        cart: [
+          {
+            productId: id,
+            productQuantity: quantity,
+            productCost: cost,
+            productColor: color,
+            productSize: size,
+          },
+        ],
+      }),
+    });
+
+    // Check if the response is okay
+    if (!response.ok) {
+      throw new Error(
+        `Failed to add to cart: ${response.status} ${response.statusText}`
+      );
+    }
+
+    console.log("Item added to cart successfully");
+
+    // Fetch and log updated users
+    const users = await getUsers(); // Await async function
+    console.log(users);
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+  }
 }
 //delete a user by their id
 

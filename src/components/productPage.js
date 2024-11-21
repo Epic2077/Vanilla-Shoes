@@ -7,8 +7,13 @@ export let exportedProduct = null;
 import priceCalc from "./productFunction/priceNum";
 import quantityFunc from "./productFunction/create-quantity";
 import renderSizes from "./productFunction/render-size";
-import getId from "./productFunction/sendData";
-import { getQuantity } from "./productFunction/sendData";
+import getId, {
+  getCost,
+  getQuantity,
+  getColor,
+  getSize,
+  pushInfo,
+} from "./productFunction/sendData";
 
 export default async function productCard(productId) {
   if (!productId) {
@@ -38,6 +43,32 @@ export default async function productCard(productId) {
     document.title = product.title;
     const quantityBox = await quantityFunc();
 
+    //Quantity set
+
+    const quantityTitle = El({
+      element: "h3",
+      children: "Quantity",
+      className: "text-[24px] font-semibold",
+    });
+
+    const quantity = El({
+      element: "div",
+      children: [quantityTitle, quantityBox],
+      className: "flex gap-4 items-center mt-[24px]",
+    });
+
+    const priceNum = await priceCalc();
+    const totalPrice = El({
+      element: "p",
+      children: "Total price",
+      className: "text-[#152536a6] text-[14px]",
+    });
+    const price = El({
+      element: "div",
+      children: [totalPrice, priceNum],
+      className: "grid",
+    });
+
     const addToCartBtn = El({
       element: "div",
       children: [
@@ -60,40 +91,19 @@ export default async function productCard(productId) {
           callback: () => {
             getId(productId);
             getQuantity();
+            getCost();
+            getColor();
+            getSize();
+            pushInfo();
           },
         },
       ],
     });
 
-    const priceNum = await priceCalc();
-    const totalPrice = El({
-      element: "p",
-      children: "Total price",
-      className: "text-[#152536a6] text-[14px]",
-    });
-    const price = El({
-      element: "div",
-      children: [totalPrice, priceNum],
-      className: "grid",
-    });
     const cart = El({
       element: "div",
       children: [price, addToCartBtn],
       className: "flex gap-[35px] items-center",
-    });
-
-    //Quantity set
-
-    const quantityTitle = El({
-      element: "h3",
-      children: "Quantity",
-      className: "text-[24px] font-semibold",
-    });
-
-    const quantity = El({
-      element: "div",
-      children: [quantityTitle, quantityBox],
-      className: "flex gap-4 items-center mt-[24px]",
     });
 
     //Renders the colors on the product page.

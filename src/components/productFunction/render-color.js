@@ -19,11 +19,19 @@ export default async function renderColors() {
           event: "click",
           callback: () => {
             console.log("color event working");
-            colorElement.forEach((cl) =>
-              cl.classList.remove("border-[2px]", "border-black")
-            );
+            colorElement.forEach((cl) => {
+              cl.classList.remove(
+                "border-[2px]",
+                "border-black",
+                "active-color"
+              );
+            });
 
-            event.target.classList.add("border-[2px]", "border-black");
+            event.target.classList.add(
+              "border-[2px]",
+              "border-black",
+              "active-color"
+            );
             selectedColor = color;
           },
         },

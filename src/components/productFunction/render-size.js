@@ -21,11 +21,11 @@ export default async function renderSizes() {
             console.log("size event working");
             // Deselect all sizes
             sizeElements.forEach((el) =>
-              el.classList.remove("bg-black", "text-white")
+              el.classList.remove("bg-black", "text-white", "active-size")
             );
 
             // Highlight the selected size
-            sizeOption.classList.add("bg-black", "text-white");
+            sizeOption.classList.add("bg-black", "text-white", "active-size");
             sizeOption.classList.remove("text-[#152536a6]");
             selectedSize = num;
           },
