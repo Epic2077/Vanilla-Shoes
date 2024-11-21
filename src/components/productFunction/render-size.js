@@ -1,10 +1,7 @@
 import { El } from "../../utils/create-element";
 import productCard, { exportedProduct } from "../productPage";
 
-export default async function renderSizes() {
-  await productCard();
-  const product = exportedProduct;
-  const size = product.size; // Assuming `product.size` is an array of sizes
+export default async function renderSizes(size) {
   let selectedSize = size[size.length - 1]; // Default to the last size
 
   const sizeElements = size.map((num) => {

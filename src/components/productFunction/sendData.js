@@ -1,26 +1,5 @@
-import productCard from "../productPage";
 import { router } from "../../routes/router";
 import { addToCart } from "../../api/users";
-
-function getUser() {
-  let user = localStorage.getItem("user");
-  console.log(user);
-  if (!user) {
-    user = sessionStorage.getItem("user");
-    if (!user) {
-      router.navigate("/Login");
-    }
-    return user;
-  } else {
-    return user;
-  }
-}
-
-export default async function getId(id) {
-  console.log(await id);
-  const productId = await id;
-  return productId;
-}
 
 export async function getQuantity() {
   let quantity = await document.getElementById("quantity").textContent;
@@ -34,15 +13,15 @@ export async function getCost() {
   return price;
 }
 
-export async function getColor() {
-  const colors = document.getElementsByClassName("active-color");
+export function getColor() {
+  debugger;
+  const color = document.querySelector(".active-color");
 
   // Check if any elements exist
-  if (colors.length === 0) {
+  if (!color) {
     console.log("No active color found default: white");
     return "white";
   } else {
-    const color = colors[0];
     console.log(`Selected color: ${color.id}`);
     let finalColor = color.id;
     return finalColor;
@@ -61,12 +40,6 @@ export async function getSize() {
     return size.textContent;
   }
 }
-
-let user = getUser();
-let productId = getId();
-let quantity = getQuantity();
-let color = getColor();
-let size = getSize();
 
 export async function pushInfo() {
   addToCart(user, productId, quantity, color, size);

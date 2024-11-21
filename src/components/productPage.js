@@ -7,36 +7,21 @@ export let exportedProduct = null;
 import priceCalc from "./productFunction/priceNum";
 import quantityFunc from "./productFunction/create-quantity";
 import renderSizes from "./productFunction/render-size";
-import getId, {
-  getCost,
-  getQuantity,
-  getColor,
-  getSize,
-  pushInfo,
-} from "./productFunction/sendData";
+import { getColor, getSize } from "./productFunction/sendData";
 
 export default async function productCard(productId) {
   if (!productId) {
-    console.error("Product ID is missing or invalid");
+    const url = window.location.pathname;
+    console.log(url[url.length - 1]);
     return;
   }
 
   console.log(productId);
-  getId(productId);
 
-  if (![productId]) {
-    console.error("Invalid product URL. Unable to extract product ID.");
-    return;
-  }
   try {
     const product = await getProductById(productId);
 
     // console.table(product);
-
-    if (!product) {
-      console.error(`Product not found for ID: ${productId}`);
-      return;
-    }
 
     exportedProduct = product;
 
@@ -89,12 +74,16 @@ export default async function productCard(productId) {
         {
           event: "click",
           callback: () => {
-            getId(productId);
-            getQuantity();
-            getCost();
-            getColor();
-            getSize();
-            pushInfo();
+            console.log(`product:`, product);
+            const cartProduct = {
+              ...product,
+              qty: document.getElementById("quantity").textContent,
+              ttlPrice:
+                product.price * document.getElementById("quantity").textContent,
+              selectedColor: getColor(),
+              selectedSize: getSize(),
+            };
+            console.table(cartProduct);
           },
         },
       ],
@@ -118,8 +107,9 @@ export default async function productCard(productId) {
         console.log("No size selected, using default:", selectedColor);
       }
     }
-    const { colorElement, selectedColor } = await renderColors();
-    const { sizeElements, selectedSize } = await renderSizes();
+    const { colorElement, selectedColor } = await renderColors(product.color);
+    const { sizeElements, selectedSize } = await renderSizes(product.size);
+    console.log(colorElement);
     const colorBox = El({
       element: "div",
       children: colorElement,

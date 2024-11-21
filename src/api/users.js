@@ -48,14 +48,23 @@ export async function addUser() {
   });
 }
 // Add to cart
-export async function addToCart(user, id, quantity, cost, color, size) {
+export async function addToCart(id, quantity, cost, color, size) {
   try {
-    const response = await fetch(`${baseUrl}/users`);
-    const foundUsers = await response.json();
-
-    let foundUser = foundUsers.find((p) => p.name === user);
-    await fetch(foundUser, {
-      method: "POST", // Fixed typo
+    function getUser() {
+      let user = localStorage.getItem("user");
+      console.log(user);
+      if (!user) {
+        user = sessionStorage.getItem("user");
+        if (!user) {
+          router.navigate("/Login");
+        }
+        return user;
+      } else {
+        return user;
+      }
+    }
+    await fetch(`${baseUrl}/users/${getUser()}`, {
+      method: "PATCH", // Fixed typo
       headers: {
         "Content-Type": "application/json", // Added required header
       },

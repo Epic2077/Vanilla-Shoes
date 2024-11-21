@@ -1,11 +1,6 @@
 import { El } from "../../utils/create-element";
-import productCard, { exportedProduct } from "../productPage";
 
-export default async function renderColors() {
-  await productCard();
-  const product = exportedProduct;
-  // console.table(product);
-  const colors = product.color;
+export default async function renderColors(colors) {
   let selectedColor = colors[colors.length - 1];
 
   const colorElement = colors.map((color) => {
