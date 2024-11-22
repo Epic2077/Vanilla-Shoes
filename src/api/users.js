@@ -50,6 +50,7 @@ export async function addUser() {
 // Add to cart
 export async function addToCart(product) {
   try {
+    //To get the logged-in user
     function getUser() {
       let user = localStorage.getItem("userId");
       console.log(user);
@@ -63,15 +64,47 @@ export async function addToCart(product) {
         return user;
       }
     }
-    await fetch(`${baseUrl}/users/${getUser()}`, {
+
+    //get the user ID
+    let userId = getUser();
+    //Fetch the user data
+    let response = await fetch(`${baseUrl}/users/${getUser()}`);
+    let person = await response.json();
+
+    //Get the current cart or initialize an empty array
+    let cartList = person.carts || [];
+    console.log(cartList);
+
+    console.log(product.productId);
+    //Check if product exists
+    const existingProduct = cartList.find(
+      (cartProduct) => cartProduct.productId === product.productId
+    );
+
+    if (existingProduct) {
+      //if the product exists increment the quantity
+      existingProduct.qty =
+        parseInt(existingProduct.qty, 10) + parseInt(product.qty, 10);
+    } else {
+      //if not add to the cart
+      cartList.push(product);
+    }
+    console.log(product);
+    const updateResponse = await fetch(`${baseUrl}/users/${userId}`, {
       method: "PATCH", // Fixed typo
       headers: {
         "Content-Type": "application/json", // Added required header
       },
       body: JSON.stringify({
-        cart: [product],
+        carts: cartList,
       }),
     });
+
+    if (!updateResponse.ok) {
+      throw new Error(
+        `Failed to update cart: ${updateResponse.status} ${updateResponse.statusText}`
+      );
+    }
 
     // Check if the response is okay
 
@@ -80,6 +113,7 @@ export async function addToCart(product) {
     // Fetch and log updated users
     const users = await getUsers(); // Await async function
     console.log(users);
+    console.log(users.carts);
   } catch (error) {
     console.error("Error adding to cart:", error);
   }

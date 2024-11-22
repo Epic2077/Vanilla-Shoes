@@ -89,6 +89,7 @@ export default async function productCard(productId) {
                   document.getElementById("quantity").textContent,
                 selectedColor: getColor(),
                 selectedSize: getSize(),
+                productId: productId,
               };
               addToCart(cartProduct);
               console.table(cartProduct);
