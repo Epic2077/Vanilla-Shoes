@@ -94,7 +94,7 @@ export function footer() {
     element: "div",
     children: [home, cart, order, wallet, profile],
     className:
-      "flex w-full justify-between px-[24px] py-[12px] items-center bg-white",
+      "flex w-full justify-between px-[24px] py-[12px] items-center bg-transparent",
   });
   return footer;
 }

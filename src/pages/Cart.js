@@ -1,4 +1,6 @@
 import cartCard from "../components/cart-card/cart-card";
+import { footer } from "../layout/footer/footer";
+import { layout } from "../layout/layout";
 import { El } from "../utils/create-element";
 export default function cartPage() {
   //   async function getCartCard() {
@@ -30,16 +32,17 @@ export default function cartPage() {
   const body = El({
     element: "div",
     children: [],
-    className: "grid gap-4 mt-[30px]",
+    className: " mt-[30px] min-h-screen",
     id: "container",
   });
   cartCard().then((products) => {
     body.append(...products); // Populate the body with products
   });
+  const layouts = layout();
   const page = El({
     element: "div",
-    children: [header, body],
-    className: "px-[32px] py-[24px]",
+    children: [header, body, layouts],
+    className: "px-[32px] py-[24px] bg-slate-100 min-h-screen",
   });
   return page;
 }
