@@ -2,6 +2,8 @@ import { findUserById } from "../../api/users";
 import { router } from "../../routes/router";
 import { El } from "../../utils/create-element";
 
+//Todo: Add a trash function, complete the order list.
+
 export default async function cartCard() {
   //Get the user thats logged-in
   const userId =
