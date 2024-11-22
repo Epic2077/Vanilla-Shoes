@@ -1,3 +1,4 @@
+import { router } from "../../routes/router";
 import { El } from "../../utils/create-element";
 
 export function footer() {
@@ -31,7 +32,14 @@ export function footer() {
         className: "font-semibold text-[10px]",
       }),
     ],
-    className: "grid w-[29px] justify-center gap-[2px] text-center",
+    className:
+      "grid w-[29px] justify-center gap-[2px] text-center cursor-pointer",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => router.navigate("/Cart"),
+      },
+    ],
   });
   const order = El({
     element: "div",

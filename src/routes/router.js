@@ -5,12 +5,16 @@ import { changePage } from "../utils/change-page";
 import { filtered } from "../components/filteration";
 import productCard from "../components/productPage";
 import login from "../pages/Login";
+import cartPage from "../pages/Cart";
 
 export const router = new Navigo("/");
 
 router
   .on("/", () => {
     changePage(OnBoardingPage);
+  })
+  .on("/Cart", () => {
+    changePage(cartPage);
   })
   .on("/Home", () => {
     changePage(HomePage);

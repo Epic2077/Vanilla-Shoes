@@ -69,7 +69,7 @@ export default async function productCard(productId) {
         }),
       ],
       className:
-        "px-[25px] py-[10px] bg-black flex justify-center items-center text-white gap-[15px] h-[90%] rounded-[50px] w-[220px]",
+        "px-[25px] py-[10px] bg-black flex justify-center items-center text-white gap-[15px] h-[90%] rounded-[50px] w-[220px] cursor-pointer",
       id: "ad-to-cart",
       eventListener: [
         {
