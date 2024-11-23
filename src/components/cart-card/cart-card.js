@@ -19,8 +19,10 @@ export default async function cartCard() {
   //Get the user with the specific ID
   const user = await findUserById(userId);
   const userCart = user.carts || [];
-
+  let totalPrices = 0;
   const cards = userCart.map((cart) => {
+    totalPrices = cart.ttlPrice + totalPrices;
+    console.log(totalPrices);
     return El({
       element: "div",
       children: [
@@ -88,5 +90,9 @@ export default async function cartCard() {
         "flex items-center p-[20px] gap-4 bg-white rounded-[30px] h-max mb-[24px]",
     });
   });
+  function setTotalPrice() {
+    document.getElementById("totalPrice").textContent = `$${totalPrices}.00`;
+  }
+  setTotalPrice();
   return cards;
 }
