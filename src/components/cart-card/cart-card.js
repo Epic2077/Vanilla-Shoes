@@ -19,6 +19,7 @@ export default async function cartCard() {
 
   //Get the user with the specific ID
   const user = await findUserById(userId);
+
   const userCart = user.carts || [];
   let totalPrices = 0;
   const cards = userCart.map((cart) => {

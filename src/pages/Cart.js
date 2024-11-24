@@ -1,3 +1,4 @@
+import { findUserById } from "../api/users";
 import cartCard from "../components/cart-card/cart-card";
 import { El } from "../utils/create-element";
 export default function cartPage() {
@@ -62,6 +63,41 @@ export default function cartPage() {
         children: "Checkout ->",
         className:
           "w-[50%] h-[60px] bg-black mr-[24px] rounded-[35px] items-center justify-center text-white grid font-semibold text-[20px] cursor-pointer",
+        eventListener: [
+          {
+            event: "click",
+            callback: async () => {
+              const userId =
+                localStorage.getItem("userId") ||
+                sessionStorage.getItem("userId");
+
+              if (!userId) {
+                router.navigate("/Login");
+                return [];
+              }
+
+              const user = await findUserById(userId);
+
+              const userCart = user.carts || [];
+              const userOrder = user.orders || [];
+
+              const response = await fetch(
+                `http://localhost:3000/users/${userId}`,
+                {
+                  method: "PATCH",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    carts: [],
+                    orders: userCart, // Update the cart
+                  }),
+                }
+              );
+              location.reload();
+            },
+          },
+        ],
       }),
     ],
     className: "flex items-center justify-between py-[24px] ",
