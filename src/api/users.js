@@ -108,7 +108,12 @@ export async function addToCart(product) {
 
     // Check if the response is okay
 
-    console.log("Item added to cart successfully");
+    document.getElementById("ad-to-cart").classList.add("border-green-500");
+    setTimeout(() => {
+      document
+        .getElementById("ad-to-cart")
+        .classList.remove("border-green-500");
+    }, 3000);
 
     // Fetch and log updated users
     const users = await getUsers(); // Await async function
