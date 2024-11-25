@@ -100,19 +100,40 @@ async function promoToBody(bodyContainer) {
   const promoCon = El({
     element: "div",
     children: [hr, promoTitle, promo],
-    className: "grid gap-4",
+    className: "grid gap-4 mb-4",
   });
+
   bodyContainer.appendChild(promoCon);
+}
+async function loadContentInOrder(body) {
+  await addCardsToBody(body); // Wait for this to complete before proceeding
+  await shippingToBody(body); // Wait for this to complete
+  await promoToBody(body); // Finally, execute this
+}
+
+function foot() {
+  return El({
+    element: "div",
+    children: [
+      El({
+        element: "div",
+        children: "Continue to Payment ->",
+        className:
+          "text-[20px] font-semibold grid justify-center items-center bg-black text-white rounded-[25px] h-[50px]",
+      }),
+    ],
+    className:
+      "h-[90px] border-gray-300 border-[1px] rounded-t-[25px] sticky bottom-0 py-4 px-[32px] bg-slate-100",
+  });
 }
 export default function checkOutPage() {
   const head = header();
   const body = main();
-  addCardsToBody(body);
-  shippingToBody(body);
-  promoToBody(body);
+  loadContentInOrder(body);
+  const footer = foot();
   return El({
     element: "div",
-    children: [head, body],
+    children: [head, body, footer],
     className: "bg-slate-100 min-h-screen",
   });
 }
