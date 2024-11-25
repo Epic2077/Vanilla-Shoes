@@ -6,6 +6,7 @@ import { filtered } from "../components/filteration";
 import productCard from "../components/productPage";
 import login from "../pages/Login";
 import cartPage from "../pages/Cart";
+import checkOutPage from "../pages/Checkout";
 
 export const router = new Navigo("/");
 
@@ -26,6 +27,9 @@ router
   .on("/Home/products/:productId", ({ data }) => {
     const { productId } = data;
     productCard(productId);
+  })
+  .on("/Checkout", () => {
+    changePage(checkOutPage);
   })
   .on("/Login", () => {
     changePage(login);

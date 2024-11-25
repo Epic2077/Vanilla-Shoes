@@ -108,13 +108,6 @@ export async function addToCart(product) {
 
     // Check if the response is okay
 
-    document.getElementById("ad-to-cart").classList.add("border-green-500");
-    setTimeout(() => {
-      document
-        .getElementById("ad-to-cart")
-        .classList.remove("border-green-500");
-    }, 3000);
-
     // Fetch and log updated users
     const users = await getUsers(); // Await async function
     console.log(users);

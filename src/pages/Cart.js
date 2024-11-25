@@ -90,6 +90,21 @@ export default function cartPage() {
               const userCart = user.carts || [];
               const userOrder = user.orders || [];
 
+              userCart.forEach((cartProduct) => {
+                const existingOrderIndex = userOrder.findIndex(
+                  (orderProduct) => orderProduct.id === cartProduct.id
+                );
+                if (existingOrderIndex !== -1) {
+                  userOrder[existingOrderIndex].qty =
+                    parseInt(userOrder[existingOrderIndex].qty) +
+                    parseInt(cartProduct.qty);
+                  userOrder[existingOrderIndex].ttlPrice +=
+                    cartProduct.ttlPrice;
+                } else {
+                  userOrder.push({ ...cartProduct });
+                }
+              });
+
               const response = await fetch(
                 `http://localhost:3000/users/${userId}`,
                 {
@@ -99,11 +114,13 @@ export default function cartPage() {
                   },
                   body: JSON.stringify({
                     carts: [],
-                    orders: userCart, // Update the cart
+                    orders: userOrder,
                   }),
                 }
               );
-              location.reload();
+              console.log("Checkout successful");
+              console.table(userOrder);
+              router.navigate("/Checkout");
             },
           },
         ],
@@ -126,6 +143,12 @@ export default function cartPage() {
       }),
     ],
     className: "grid w-[29px] justify-center gap-[2px] text-center",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => router.navigate("/Home"),
+      },
+    ],
   });
   const cart = El({
     element: "div",
@@ -165,6 +188,12 @@ export default function cartPage() {
       }),
     ],
     className: "grid w-[29px] justify-center gap-[2px] text-center",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => router.navigate("/Order"),
+      },
+    ],
   });
   const wallet = El({
     element: "div",

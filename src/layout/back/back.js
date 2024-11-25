@@ -9,9 +9,7 @@ export function back() {
     eventListener: [
       {
         event: "click",
-        callback: () => {
-          router.navigate("/Home");
-        },
+        callback: () => router.navigate("/Cart"),
       },
     ],
   });
