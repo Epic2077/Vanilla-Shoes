@@ -222,7 +222,7 @@ const createProductCard = (product) => {
   const img = El({
     element: "img",
     src: product.images,
-    className: "w-[142px] h-[142px]",
+    className: "w-[142px] h-[142px] rounded-[24px]",
   });
   const imgBox = El({
     element: "div",

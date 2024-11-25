@@ -1,5 +1,6 @@
 import { findUserById } from "../api/users";
 import cartCard from "../components/cart-card/cart-card";
+import { router } from "../routes/router";
 import { El } from "../utils/create-element";
 export default function cartPage() {
   //   async function getCartCard() {
@@ -13,6 +14,14 @@ export default function cartPage() {
         src: "../../src/assets/image/logo.svg",
         alt: "logo",
         className: "w-[20px]",
+        eventListener: [
+          {
+            event: "click",
+            callback: () => {
+              router.navigate("/Home");
+            },
+          },
+        ],
       }),
       El({
         element: "h1",
