@@ -1,5 +1,6 @@
 import address from "../components/checkoutElements/address";
 import checkoutCard from "../components/checkoutElements/checkoutCard";
+import shipping from "../components/checkoutElements/shipping";
 import { back } from "../layout/back/back";
 import { El } from "../utils/create-element";
 
@@ -66,10 +67,29 @@ async function addCardsToBody(bodyContainer) {
   // Append the card container to the provided body container
   bodyContainer.appendChild(cardContainer);
 }
+async function shippingToBody(bodyContainer) {
+  const shippingStat = await shipping();
+  const hr = El({
+    element: "hr",
+    className: "border-slate-300 mt-4 border-y-1",
+  });
+  const shippingTitle = El({
+    element: "h2",
+    children: "Choose Shipping",
+    className: "text-[25px] font-semibold",
+  });
+  const shippingCon = El({
+    element: "div",
+    children: [hr, shippingTitle, shippingStat],
+    className: "grid gap-4",
+  });
+  bodyContainer.appendChild(shippingCon);
+}
 export default function checkOutPage() {
   const head = header();
   const body = main();
   addCardsToBody(body);
+  shippingToBody(body);
   return El({
     element: "div",
     children: [head, body],

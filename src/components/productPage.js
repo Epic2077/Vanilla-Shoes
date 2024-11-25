@@ -9,6 +9,7 @@ import quantityFunc from "./productFunction/create-quantity";
 import renderSizes from "./productFunction/render-size";
 import { getColor, getSize } from "./productFunction/sendData";
 import { addToCart } from "../api/users";
+import shipping from "./checkoutElements/shipping";
 
 export default async function productCard(productId) {
   if (!productId) {
@@ -90,6 +91,7 @@ export default async function productCard(productId) {
                 selectedColor: getColor(),
                 selectedSize: getSize(),
                 productId: productId,
+                shipping: "Pending",
               };
               addToCart(cartProduct);
               console.table(cartProduct);

@@ -13,8 +13,6 @@ export default async function checkoutCard() {
   const user = await findUserById(userId);
   console.log("Fetched userL", user);
 
-  console.log(user);
-
   const userOrders = user.orders || [];
 
   const card = userOrders.map((order) => {
