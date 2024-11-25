@@ -1,5 +1,6 @@
 import address from "../components/checkoutElements/address";
 import checkoutCard from "../components/checkoutElements/checkoutCard";
+import promoCode from "../components/checkoutElements/promoCode";
 import shipping from "../components/checkoutElements/shipping";
 import { back } from "../layout/back/back";
 import { El } from "../utils/create-element";
@@ -85,11 +86,30 @@ async function shippingToBody(bodyContainer) {
   });
   bodyContainer.appendChild(shippingCon);
 }
+async function promoToBody(bodyContainer) {
+  const promo = await promoCode();
+  const hr = El({
+    element: "hr",
+    className: "border-slate-300 mt-4 border-y-1",
+  });
+  const promoTitle = El({
+    element: "h2",
+    children: "Promo Code",
+    className: "text-[25px] font-semibold",
+  });
+  const promoCon = El({
+    element: "div",
+    children: [hr, promoTitle, promo],
+    className: "grid gap-4",
+  });
+  bodyContainer.appendChild(promoCon);
+}
 export default function checkOutPage() {
   const head = header();
   const body = main();
   addCardsToBody(body);
   shippingToBody(body);
+  promoToBody(body);
   return El({
     element: "div",
     children: [head, body],
