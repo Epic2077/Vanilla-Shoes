@@ -8,6 +8,8 @@ Whether you're browsing, checking out, or managing orders, Vanilla Shoes ensures
 
 <div align="center"> <img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.22.png" width="250px"/> <img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.52.png" width="250px"/> <img src="./src/assets/screenshots/Screen Shot 2024-11-23 at 01.11.43.png" width="250px"/> </div>
 
+---
+
 ## 📋 Table of Contents
 
 - [About the Project](#about-the-project)
