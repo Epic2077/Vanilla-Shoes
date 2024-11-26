@@ -237,7 +237,7 @@ const createProductCard = (product) => {
   });
   const price = El({
     element: "p",
-    children: `$ ${product.price}`,
+    children: `$ ${product.price}.00`,
     className: "font-semibold text[16px] mt-[8px]",
   });
   const card = El({
