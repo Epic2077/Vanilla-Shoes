@@ -1,5 +1,7 @@
+import { findUserById } from "../api/users";
 import paymentOptions from "../components/payment-card/payment-option";
 import { backToCheckOut } from "../layout/back/back";
+import { router } from "../routes/router";
 import { El } from "../utils/create-element";
 
 function header() {
@@ -58,7 +60,52 @@ function foot() {
     eventListener: [
       {
         event: "click",
-        callback: () => {
+        callback: async () => {
+          const userId =
+            localStorage.getItem("userId") || sessionStorage.getItem("userId");
+
+          if (!userId) {
+            router.navigate("/Login");
+            return [];
+          }
+
+          const user = await findUserById(userId);
+
+          const userOrder = user.orders || [];
+          const userComplete = user.complete || [];
+
+          userOrder.forEach((orderProduct) => {
+            const existingCompleteIndex = userComplete.findIndex(
+              (completeProduct) => completeProduct.id === orderProduct.id
+            );
+            if (existingCompleteIndex !== -1) {
+              userComplete[existingCompleteIndex].qty =
+                parseInt(userComplete[existingCompleteIndex].qty) +
+                parseInt(orderProduct.qty);
+              userComplete[existingCompleteIndex].ttlPrice +=
+                orderProduct.ttlPrice;
+            } else {
+              userComplete.push({ ...orderProduct });
+            }
+          });
+
+          const response = await fetch(
+            `http://localhost:3000/users/${userId}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                orders: [],
+                complete: userComplete,
+              }),
+            }
+          );
+          console.log("Checkout successful");
+          console.log("completed: ", userComplete);
+          console.log("Orders: ", userOrder);
+
           const layer = El({
             element: "div",
             children: "",
@@ -81,12 +128,36 @@ function foot() {
                       }),
                     ],
                     className:
-                      "bg-black rounded-full w-[150px] h-[150px] grid justify-center items-center mb-8",
+                      "bg-black rounded-full w-[150px] h-[150px] grid justify-center items-center mb-8 mt-4 mx-auto",
                   }),
                   El({
                     element: "h3",
                     children: "Order Successful!",
-                    className: "text-[18px] font-semibold text-black",
+                    className:
+                      "text-[18px] font-semibold text-black text-center",
+                  }),
+                  El({
+                    element: "p",
+                    children: "You have successfully made order",
+                    className: "text-gray-600 text-[14px] text-center",
+                  }),
+                  El({
+                    element: "div",
+                    children: "View Order",
+                    className:
+                      "w-full h-[55px] bg-black text-white grid items-center justify-center rounded-[25px]",
+                    eventListener: [
+                      {
+                        event: "click",
+                        callback: () => router.navigate("/Order"),
+                      },
+                    ],
+                  }),
+                  El({
+                    element: "div",
+                    children: "View E-Receipt",
+                    className:
+                      "w-full h-[55px] bg-gray-500 text-white grid items-center justify-center rounded-[25px]",
                   }),
                 ],
                 className:
