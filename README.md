@@ -111,10 +111,9 @@ Contributions are welcome! To contribute:
 
 3. **Commit your changes:**
 
-   ````bash
+   ```bash
    git commit -m 'Add YourFeature'
    ```
-   ````
 
 4. **Push to the branch:**
 
