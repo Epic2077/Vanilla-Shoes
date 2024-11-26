@@ -29,9 +29,9 @@ The **Vanilla Shoes** e-commerce platform is built for showcasing premium sneake
 - **Dynamic Filtering**: Browse products by brand or category with smooth navigation between pages.
 - **Order Management**: Easily review and manage orders, including real-time shipping status updates.
 - **API Integration**: Fetch product and user data dynamically from a custom back-end.
-- **Mobile View Only**: Works only on a mobile view port at the moment.
-- **User Friendly**: Very user friendly interface.
-- **Simple and Clean UI**: Focused on creating a welcoming and user-friendly interface.
+- **Mobile-First Design**: Optimized for mobile devices, offering a seamless experience on smaller screens.
+- **Reusable Components**: Modular architecture for better scalability and maintainability.
+- **Error Handling**: Robust mechanisms to handle API errors and ensure a smooth user experience.
 
 ---
 
@@ -44,7 +44,8 @@ The **Vanilla Shoes** e-commerce platform is built for showcasing premium sneake
 - **Tailwind CSS**
 - **Vite**
 - **[Figma](https://www.figma.com/design/ku0eN6V3Qga0p9rmboXPcC/shoe-exercise?node-id=0-1&t=GPeKBtALkxkTluEY-1)**
-- **Custom Components (via `El` Utility Function)**
+- **Custom Components: via `El` Utility Function**
+- **Custom API Back-End: Powered by `JSON-server`**
 
 This project relies on a modular approach, leveraging reusable components to create UI elements and manage state.
 
@@ -53,6 +54,8 @@ This project relies on a modular approach, leveraging reusable components to cre
 ## 🚀 Installation
 
 To set up this project locally, follow these steps:
+
+**Front-End**
 
 1. **Clone the Repository**:
    ```bash
@@ -68,39 +71,58 @@ To set up this project locally, follow these steps:
    ```bash
    npm run dev
    ```
-4. **Install Back-end**:
-   The back-end of the website is stored in another repo called [Vanilla-Shoes-Back-End](https://github.com/Epic2077/Vanilla-Shoes-Back-End). It contains the api and JSON needed for the project to be fetched using `JSON-server`.
+
+**Back-End**
+
+1. **Clone the Back-End Repository**:
 
    ```bash
     git clone https://github.com/Epic2077/Vanilla-Shoes-Back-End.git
     cd Vanilla-Shoes-Back-End
    ```
 
-   Then install the dependencies.
+2. **Install the dependencies:**
 
    ```bash
     npm install
    ```
 
-   Now you can start the `JSON-server`.
+3. **Start the JSON Server:**
 
    ```bash
     npm start
    ```
 
-   **Make Sure the local address of your server and `JSON-server` is different!**
+4. **Note:** Ensure that the front-end and back-end servers are running on different ports (e.g., 5173 for the front-end and 3000 for the JSON server).
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Follow these steps to get involved:
+Contributions are welcome! To contribute:
 
-1. Fork the project
-2. Create a new branch: `git checkout -b feature/YourFeature`
-3. Commit your changes: `git commit -m 'Add YourFeature'`
-4. Push to the branch: `git push origin feature/YourFeature`
-5. Open a pull request
+1. Fork the project.
+
+2. **Create a new branch:**
+
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+
+3. **Commit your changes:**
+
+   ````bash
+   git commit -m 'Add YourFeature'
+   ```
+   ````
+
+4. **Push to the branch:**
+
+   ```bash
+   git push origin feature/YourFeature
+   ```
+
+5. Submit a pull request.
 
 ---
 
@@ -108,3 +130,5 @@ Contributions are welcome! Follow these steps to get involved:
 
 - Special thanks to the open-source community for the tools and resources that inspired this project.
 - Thanks to [Maktab Sharif](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://maktabsharif.ir/&ved=2ahUKEwinmq3kzc-JAxU_hv0HHRmTJzgQFnoECBoQAQ&usg=AOvVaw0Zpog7mWc26mxQ5yxC_XN3) for helping me overcome the challenges of becoming a Front-End developer.
+
+---
