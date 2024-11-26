@@ -9,7 +9,33 @@ export function back() {
     eventListener: [
       {
         event: "click",
+        callback: () => router.navigate("/Home"),
+      },
+    ],
+  });
+}
+export function backToCart() {
+  return El({
+    element: "img",
+    src: "../src/assets/icons/back.svg",
+    className: "cursor-pointer",
+    eventListener: [
+      {
+        event: "click",
         callback: () => router.navigate("/Cart"),
+      },
+    ],
+  });
+}
+export function backToCheckOut() {
+  return El({
+    element: "img",
+    src: "../src/assets/icons/back.svg",
+    className: "cursor-pointer",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => router.navigate("/Checkout"),
       },
     ],
   });

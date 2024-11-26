@@ -2,7 +2,7 @@ import address from "../components/checkoutElements/address";
 import checkoutCard from "../components/checkoutElements/checkoutCard";
 import promoCode from "../components/checkoutElements/promoCode";
 import shipping from "../components/checkoutElements/shipping";
-import { back } from "../layout/back/back";
+import { backToCart } from "../layout/back/back";
 import { router } from "../routes/router";
 import { El } from "../utils/create-element";
 
@@ -10,7 +10,7 @@ function header() {
   const header = El({
     element: "div",
     children: [
-      back(),
+      backToCart(),
       El({
         element: "h1",
         children: "Checkout",
@@ -120,7 +120,7 @@ function foot() {
         element: "div",
         children: "Continue to Payment ->",
         className:
-          "text-[20px] font-semibold grid justify-center items-center bg-black text-white rounded-[25px] h-[50px]",
+          "text-[20px] font-semibold grid justify-center items-center bg-black text-white rounded-[25px] h-[50px] cursor-pointer",
       }),
     ],
     className:
