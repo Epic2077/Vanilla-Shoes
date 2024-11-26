@@ -1,8 +1,10 @@
-# Vanilla Shoes
+# Vanilla Shoes: A Modern E-Commerce Application
 
-Welcome to the **Vanilla Shoes e-commerce app**, a modern, visually engaging onboarding experience designed for a high-quality sneakers and shoes e-commerce application. This app aims to provide a seamless and immersive first impression for users, showcasing the brand's dedication to quality, customer satisfaction, and fashion.
+**Vanilla Shoes** is a responsive and feature-rich e-commerce application designed for sneaker enthusiasts. This project combines a sleek, mobile-friendly UI with robust functionality, showcasing high-quality sneakers while offering a seamless shopping experience.
 
-<img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.22.png" width="250px"/> <img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.52.png" width="250px"/> <img src="./src/assets/screenshots/Screen Shot 2024-11-23 at 01.11.43.png" width="250px"/>
+Whether you're browsing, checking out, or managing orders, Vanilla Shoes ensures that every interaction is user-centric, visually engaging, and intuitive.
+
+<div align="center"> <img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.22.png" width="250px"/> <img src="./src/assets/screenshots/Screen Shot 2024-11-15 at 01.12.52.png" width="250px"/> <img src="./src/assets/screenshots/Screen Shot 2024-11-23 at 01.11.43.png" width="250px"/> </div>
 
 ## 📋 Table of Contents
 
@@ -11,18 +13,22 @@ Welcome to the **Vanilla Shoes e-commerce app**, a modern, visually engaging onb
 - [Built With](#built-with)
 - [Installation](#installation)
 - [Contributing](#contributing)
+- [Acknowledgments](#acknowledgments)
 
 ---
 
 ## 🎯 About the Project
 
-The **Shoes E-Commerce App** is built to guide new users through a welcoming journey, introducing them to the brand and what it stands for. By using sleek, animated slides, the app highlights the key aspects of the company and sets the tone for an exceptional user experience.
+The **Vanilla Shoes** e-commerce platform is built for showcasing premium sneakers in a dynamic, user-friendly manner. The app focuses on simplicity, speed, and clarity to provide an enjoyable shopping experience. With key features like order management, a modular UI, and brand filtering, this app stands out as a clean and efficient solution for e-commerce needs.
 
 ---
 
 ## ✨ Features
 
-- **Dynamic**: Each Page Is unique and has dynamic usage.
+- **Onboarding Flow**: An interactive onboarding experience introduces users to the brand and its values.
+- **Dynamic Filtering**: Browse products by brand or category with smooth navigation between pages.
+- **Order Management**: Easily review and manage orders, including real-time shipping status updates.
+- **API Integration**: Fetch product and user data dynamically from a custom back-end.
 - **Mobile View Only**: Works only on a mobile view port at the moment.
 - **User Friendly**: Very user friendly interface.
 - **Simple and Clean UI**: Focused on creating a welcoming and user-friendly interface.

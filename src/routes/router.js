@@ -7,6 +7,7 @@ import productCard from "../components/productPage";
 import login from "../pages/Login";
 import cartPage from "../pages/Cart";
 import checkOutPage from "../pages/Checkout";
+import payment from "../pages/Payment";
 
 export const router = new Navigo("/");
 
@@ -30,6 +31,9 @@ router
   })
   .on("/Checkout", () => {
     changePage(checkOutPage);
+  })
+  .on("/Payment", () => {
+    changePage(payment);
   })
   .on("/Login", () => {
     changePage(login);

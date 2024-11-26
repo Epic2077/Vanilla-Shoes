@@ -3,6 +3,7 @@ import checkoutCard from "../components/checkoutElements/checkoutCard";
 import promoCode from "../components/checkoutElements/promoCode";
 import shipping from "../components/checkoutElements/shipping";
 import { back } from "../layout/back/back";
+import { router } from "../routes/router";
 import { El } from "../utils/create-element";
 
 function header() {
@@ -124,6 +125,14 @@ function foot() {
     ],
     className:
       "h-[90px] border-gray-300 border-[1px] rounded-t-[25px] sticky bottom-0 py-4 px-[32px] bg-slate-100",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => {
+          router.navigate("/Payment");
+        },
+      },
+    ],
   });
 }
 export default function checkOutPage() {
