@@ -172,15 +172,50 @@ const createFiltration = () => {
     children: [mostPopular, seeAll],
     className: "justify-between w-full mb-[20px] flex mt-[4px]",
   });
+
+  function filterProductsByBrand(brand) {
+    getProducts()
+      .then((products) => {
+        console.log(products);
+
+        products.forEach((product) => {
+          // Assuming `product.element` refers to the DOM element of the product
+          const productElement = document.querySelector(
+            `#product-${product.id}`
+          );
+
+          let btn;
+          if (brand !== "All") {
+            btn = document.querySelector(`#btn-${brand.name}`);
+          } else {
+            btn = document.querySelector(`#btn-${brand}`);
+          }
+
+          if (brand === "All" || product.brand === brand.name.toLowerCase()) {
+            productElement.classList.remove("hidden");
+            btn.classList.add("bg-[#343A40]", "text-white");
+            btn.classList.remove("bg-transparent");
+          } else {
+            productElement.classList.add("hidden");
+            btn.classList.remove("bg-[#343A40]", "text-white");
+            btn.classList.add("bg-transparent");
+          }
+        });
+      })
+      .catch((error) => {
+        console.error("Failed to fetch products:", error);
+      });
+  }
   const filterButtonsActive = El({
     element: "div",
     children: "All",
+    id: "btn-All",
     className:
       "bg-[#343A40] px-[20px]  h-[39px] border-[2px] border-[#343A40] text-white font-semibold text-[16px] items-center grid rounded-[25px] cursor-pointer",
     eventListener: [
       {
         event: "click",
-        callback: () => router.navigate("/Home/All"),
+        callback: () => filterProductsByBrand("All"),
       },
     ],
   });
@@ -189,16 +224,18 @@ const createFiltration = () => {
       element: "p",
       children: brand.name,
       className: "font-semibold text-[16px] text-[#343A40] bg-transparent",
+      id: `text-${brand.name}`,
     });
     const filterButton = El({
       element: "div",
       children: brandName,
       className:
         "grid bg-transparent border-[2px] border-[#343A40] justify-center items-center px-[20px] h-[39px] rounded-[25px] cursor-pointer",
+      id: `btn-${brand.name}`,
       eventListener: [
         {
           event: "click",
-          callback: () => router.navigate(`/Home/${brand.fullName}`),
+          callback: () => filterProductsByBrand(brand),
         },
       ],
     });
@@ -243,8 +280,8 @@ const createProductCard = (product) => {
   const card = El({
     element: "div",
     children: [imgBox, names, price],
-    id: product.id,
-    className: `  grid ${product.brand} mb-[8px] cursor-pointer`,
+    id: `product-${product.id}`,
+    className: `  grid ${product.brand} mb-[8px] cursor-pointer `,
     eventListener: [
       {
         event: "click",
