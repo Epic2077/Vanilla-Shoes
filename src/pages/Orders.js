@@ -1,5 +1,6 @@
 import { activeCard } from "../components/order-cards/active-card";
 import { completedCard } from "../components/order-cards/completed-card";
+import { footer } from "../layout/footer/footer";
 import { router } from "../routes/router";
 import { El } from "../utils/create-element";
 
@@ -125,13 +126,13 @@ function body() {
   const bodyCard = El({
     element: "div",
     children: [],
-    className: "",
+    className: "min-h-[75vh]",
     id: "bodyContainer",
   });
   const bodyContainer = El({
     element: "div",
     children: [bodyHead, bodyCard],
-    className: "grid px-[32px]",
+    className: "grid px-[32px] ",
   });
   return bodyContainer;
 }
@@ -139,10 +140,11 @@ function body() {
 export default function orderPage() {
   const head = header();
   const main = body();
+  const foot = footer();
 
   const page = El({
     element: "div",
-    children: [head, main],
+    children: [head, main, foot],
     className: "min-h-screen bg-slate-100",
   });
 
