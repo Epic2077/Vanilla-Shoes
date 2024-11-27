@@ -1,3 +1,4 @@
+import { activeCard } from "../components/order-cards/active-card";
 import { router } from "../routes/router";
 import { El } from "../utils/create-element";
 
@@ -27,6 +28,36 @@ function header() {
   return header;
 }
 
+async function updateCards() {
+  console.log("updateCards called"); // Debugging step
+
+  const ActiveCards = await activeCard();
+
+  console.log("ActiveCards:", ActiveCards); // Ensure ActiveCards is valid
+
+  const isActive = document
+    .getElementById("active")
+    .classList.contains("active");
+
+  if (isActive) {
+    // Clear previous content
+    const bodyContainer = document.getElementById("bodyContainer");
+    if (!bodyContainer) {
+      console.error("Body container not found!");
+      return;
+    }
+    bodyContainer.innerHTML = ""; // Clear existing content
+
+    // Append new cards
+    if (ActiveCards) {
+      bodyContainer.appendChild(ActiveCards); // Append directly
+      console.log("ActiveCards appended to bodyContainer");
+    } else {
+      console.error("No ActiveCards returned from activeCard()");
+    }
+  }
+}
+
 function body() {
   const toggleTab = (activeTab, inactiveTab) => {
     document.getElementById(activeTab).classList.add("border-black");
@@ -40,6 +71,12 @@ function body() {
     document
       .getElementById(`${inactiveTab}-text`)
       .classList.add("text-gray-400");
+    const bodyContainer = document.getElementById("bodyContainer");
+    if (bodyContainer) {
+      updateCards(bodyContainer);
+    } else {
+      console.error("Body container not found during tab toggle!");
+    }
   };
 
   const createTab = (id, text, isActive) =>
@@ -57,7 +94,7 @@ function body() {
       ],
       id,
       className: `w-[50%] border-b-4 mt-5 ${
-        isActive ? "border-black" : "border-gray-400"
+        isActive ? "border-black active" : "border-gray-400"
       }`,
       eventListener: [
         {
@@ -71,20 +108,38 @@ function body() {
   const completed = createTab("completed", "Completed", false); // Not active by default
   const active = createTab("active", "Active", true); // Active by default
 
-  const bodyContainer = El({
+  const bodyHead = El({
     element: "div",
     children: [active, completed],
-    className: "flex px-[32px]",
+    className: "flex",
+  });
+  const bodyCard = El({
+    element: "div",
+    children: [],
+    className: "",
+    id: "bodyContainer",
+  });
+  const bodyContainer = El({
+    element: "div",
+    children: [bodyHead, bodyCard],
+    className: "grid px-[32px]",
   });
   return bodyContainer;
 }
+
 export default function orderPage() {
   const head = header();
   const main = body();
 
-  return El({
+  const page = El({
     element: "div",
     children: [head, main],
-    className: "min-h-screen bg-slate-200",
+    className: "min-h-screen bg-slate-100",
   });
+
+  setTimeout(() => {
+    updateCards(document.getElementById("bodyContainer"));
+  }, 0); // Delay updateCards to allow DOM rendering
+
+  return page;
 }
