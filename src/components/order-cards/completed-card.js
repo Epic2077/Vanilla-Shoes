@@ -64,7 +64,7 @@ export async function completedCard() {
             "bg-black rounded-[20px] h-[35px] w-max p-2 ml-auto text-white grid justify-center items-center text-[13px]",
         }),
       ],
-      className: "flex justify-between items-center",
+      className: "flex justify-between items-center gap-4",
     });
     const detailContainer = El({
       element: "div",
