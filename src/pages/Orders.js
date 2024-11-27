@@ -1,1 +1,6 @@
-export default function orderPage() {}
+export default function orderPage() {
+  return El({
+    element: "div",
+    children: "Hello",
+  });
+}

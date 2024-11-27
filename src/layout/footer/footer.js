@@ -56,6 +56,12 @@ export function footer() {
       }),
     ],
     className: "grid w-[29px] justify-center gap-[2px] text-center",
+    eventListener: [
+      {
+        event: "click",
+        callback: () => router.navigate("/Order"),
+      },
+    ],
   });
   const wallet = El({
     element: "div",
