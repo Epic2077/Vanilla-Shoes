@@ -1,4 +1,5 @@
 import { activeCard } from "../components/order-cards/active-card";
+import { completedCard } from "../components/order-cards/completed-card";
 import { router } from "../routes/router";
 import { El } from "../utils/create-element";
 
@@ -32,28 +33,37 @@ async function updateCards() {
   console.log("updateCards called"); // Debugging step
 
   const ActiveCards = await activeCard();
+  const completeCards = await completedCard();
 
   console.log("ActiveCards:", ActiveCards); // Ensure ActiveCards is valid
+  console.log("completeCards:", completeCards); // Debugging completed cards
+
+  const bodyContainer = document.getElementById("bodyContainer");
+  if (!bodyContainer) {
+    console.error("Body container not found!");
+    return;
+  }
 
   const isActive = document
     .getElementById("active")
     .classList.contains("active");
 
-  if (isActive) {
-    // Clear previous content
-    const bodyContainer = document.getElementById("bodyContainer");
-    if (!bodyContainer) {
-      console.error("Body container not found!");
-      return;
-    }
-    bodyContainer.innerHTML = ""; // Clear existing content
+  // Clear previous content
+  bodyContainer.innerHTML = ""; // Clear existing content
 
-    // Append new cards
+  if (isActive) {
     if (ActiveCards) {
-      bodyContainer.appendChild(ActiveCards); // Append directly
+      bodyContainer.appendChild(ActiveCards); // Append active cards
       console.log("ActiveCards appended to bodyContainer");
     } else {
       console.error("No ActiveCards returned from activeCard()");
+    }
+  } else {
+    if (completeCards) {
+      bodyContainer.appendChild(completeCards); // Append completed cards
+      console.log("completeCards appended to bodyContainer");
+    } else {
+      console.error("No completeCards returned from completedCard()");
     }
   }
 }
@@ -68,15 +78,13 @@ function body() {
 
     document.getElementById(inactiveTab).classList.add("border-gray-400");
     document.getElementById(inactiveTab).classList.remove("border-black");
+    document.getElementById(inactiveTab).classList.remove("active");
     document
       .getElementById(`${inactiveTab}-text`)
       .classList.add("text-gray-400");
-    const bodyContainer = document.getElementById("bodyContainer");
-    if (bodyContainer) {
-      updateCards(bodyContainer);
-    } else {
-      console.error("Body container not found during tab toggle!");
-    }
+
+    // Trigger card update
+    updateCards();
   };
 
   const createTab = (id, text, isActive) =>
