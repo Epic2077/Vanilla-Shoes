@@ -126,7 +126,7 @@ function body() {
   const bodyCard = El({
     element: "div",
     children: [],
-    className: "min-h-[75vh]",
+    className: "min-h-[90vh]",
     id: "bodyContainer",
   });
   const bodyContainer = El({
