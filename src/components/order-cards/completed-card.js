@@ -62,12 +62,6 @@ export async function completedCard() {
           children: "Leave Review",
           className:
             "bg-black rounded-[20px] h-[35px] w-max p-2 ml-auto text-white grid justify-center items-center text-[13px]",
-          eventListener: [
-            {
-              event: "click",
-              callback: () => router.navigate("/Checkout"),
-            },
-          ],
         }),
       ],
       className: "flex justify-between items-center",
