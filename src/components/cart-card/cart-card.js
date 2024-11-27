@@ -19,7 +19,7 @@ export default async function cartCard() {
 
   //Get the user with the specific ID
   const user = await findUserById(userId);
-
+  // bg-rose-700 bg-emerald-700 bg-red-700 bg-gray-700 bg-teal-700 bg-white-700
   const userCart = user.carts || [];
   let totalPrices = 0;
   const cards = userCart.map((cart) => {

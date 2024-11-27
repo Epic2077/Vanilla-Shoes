@@ -6,6 +6,7 @@ import { backToCart } from "../layout/back/back";
 import { router } from "../routes/router";
 import { El } from "../utils/create-element";
 
+// bg-rose-700 bg-emerald-700 bg-red-700 bg-gray-700 bg-teal-700 bg-white-700
 function header() {
   const header = El({
     element: "div",

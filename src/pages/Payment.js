@@ -155,9 +155,15 @@ function foot() {
                   }),
                   El({
                     element: "div",
-                    children: "View E-Receipt",
+                    children: "Go To Main Page",
                     className:
                       "w-full h-[55px] bg-gray-500 text-white grid items-center justify-center rounded-[25px]",
+                    eventListener: [
+                      {
+                        event: "click",
+                        callback: () => router.navigate("/Home"),
+                      },
+                    ],
                   }),
                 ],
                 className:

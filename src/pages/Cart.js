@@ -6,6 +6,7 @@ export default function cartPage() {
   //   async function getCartCard() {
   //     return await cartCard();
   //   }
+  // bg-rose-700 bg-emerald-700 bg-red-700 bg-gray-700 bg-teal-700 bg-white-700
   const header = El({
     element: "div",
     children: [
