@@ -72,6 +72,7 @@ function body() {
   const toggleTab = (activeTab, inactiveTab) => {
     document.getElementById(activeTab).classList.add("border-black");
     document.getElementById(activeTab).classList.remove("border-gray-400");
+    document.getElementById(activeTab).classList.add("active");
     document
       .getElementById(`${activeTab}-text`)
       .classList.remove("text-gray-400");
