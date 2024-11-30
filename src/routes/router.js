@@ -9,6 +9,7 @@ import cartPage from "../pages/Cart";
 import checkOutPage from "../pages/Checkout";
 import payment from "../pages/Payment";
 import orderPage from "../pages/Orders";
+import searchPage from "../pages/Search";
 
 export const router = new Navigo("/");
 
@@ -25,6 +26,9 @@ router
   .on("/Home/:brandName", ({ data }) => {
     const { brandName } = data;
     filtered(brandName);
+  })
+  .on("/Search", () => {
+    changePage(searchPage);
   })
   .on("/Home/products/:productId", ({ data }) => {
     const { productId } = data;

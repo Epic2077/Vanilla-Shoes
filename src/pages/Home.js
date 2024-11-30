@@ -88,6 +88,12 @@ const createSearchBar = () => {
     element: "div",
     children: [searchIcon, searchBar],
     className: "w-full h-[37px] bg-[#FAFAFA] flex items-center px-4 mt-[8px]",
+    eventListener: [
+      {
+        event: "input",
+        callback: handleSearch,
+      },
+    ],
   });
 };
 
