@@ -63,6 +63,15 @@ const createHeader = () => {
 };
 
 const createSearchBar = () => {
+  const handleSearch = (e) => {
+    const searchValue = e.target.value.trim();
+
+    if (searchValue.length > 0) {
+      localStorage.setItem("searchTerm", searchValue);
+    }
+
+    router.navigate("/Search");
+  };
   const searchIcon = El({
     element: "img",
     src: "./src/assets/image/search.svg",
